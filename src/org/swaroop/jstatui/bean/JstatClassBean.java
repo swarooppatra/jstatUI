@@ -13,7 +13,8 @@ import org.swaroop.jstatui.annotations.Table;
  * 
  */
 @Table(name = "jstat_class")
-public class JstatClassBean implements Serializable, Comparable<JstatClassBean> {
+public class JstatClassBean implements JstatOptionBean, Serializable,
+		Comparable<JstatClassBean> {
 
 	private static final long serialVersionUID = 1L;
 

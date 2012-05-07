@@ -3,8 +3,11 @@
  */
 package org.swaroop.jstatui.dao;
 
+import org.apache.log4j.Logger;
 import org.swaroop.jstatui.bean.JstatHostBean;
 import org.swaroop.jstatui.orm.ORMProcessor;
+
+import com.mysql.jdbc.interceptors.SessionAssociationInterceptor;
 
 /**
  * This DAO corresponds to jstatui.jstat_host table and JstatHostBean
@@ -13,6 +16,8 @@ import org.swaroop.jstatui.orm.ORMProcessor;
  * 
  */
 public class JstatHostDAO {
+	
+	private static final Logger log = Logger.getLogger("jstatui");
 
   public JstatHostDAO() {
   }
@@ -21,7 +26,8 @@ public class JstatHostDAO {
     boolean inserted = false;
     if (bean == null) {
       // TODO : replace with reporting/logging process
-      System.out.println("Invalid JstatHostBean object");
+      log.error("Invalid JstatHostBean object");
+     
       return inserted;
     }
     inserted = ORMProcessor.insertABean(bean);

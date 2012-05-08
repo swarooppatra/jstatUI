@@ -7,6 +7,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import org.apache.log4j.Logger;
+import org.swaroop.jstatui.error.JstatUIError;
+
 /**
  * This is a util class for a process in OS
  * 
@@ -15,12 +18,14 @@ import java.io.InputStreamReader;
  */
 public class ProcessUtil {
 
+  private static final Logger log = Logger.getLogger("jstatui");
+
   // TODO : For windows > tasklist /FI "PID eq <pid>" /FO CSV /NH /V
   public static String getProcessStartDateTime(String host, int processID) {
     String startDateTime = "";
     if (processID < 0 || host == null || "".equals(host)) {
-      // TODO : replace with reporting/logging process
-      System.out.println("Invalid Process ID/Host name supplied");
+      log.error("Invalid Process ID/Host name supplied");
+      JstatUIError.addErrors(600, "Invalid Process ID/Host name supplied");
       return startDateTime;
     }
     String sshCommand = "ssh " + host
@@ -31,16 +36,16 @@ public class ProcessUtil {
           sshProc.getInputStream()));
       String cmdOutput = br.readLine();
       if (cmdOutput == null || "".equals(cmdOutput)) {
-        // TODO : replace with reporting/logging process
-        System.out.println("No such process running");
+        log.error("No such process running");
+        JstatUIError.addErrors(602, "No such process running");
         return startDateTime;
       } else {
         startDateTime = cmdOutput.trim().split(" ")[5].replaceAll("::", " ");
         return startDateTime;
       }
     } catch (IOException e) {
-      // TODO : replace with reporting/logging process
-      e.printStackTrace();
+      log.error("Error in I/O stream Operation", e);
+      JstatUIError.addErrors(603, "Error in I/O stream Operation");
     }
     return startDateTime;
   }

@@ -3,10 +3,21 @@
 	<display-name>jstatUI</display-name>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
-		<welcome-file>index.htm</welcome-file>
-		<welcome-file>index.jsp</welcome-file>
-		<welcome-file>default.html</welcome-file>
-		<welcome-file>default.htm</welcome-file>
-		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
+	<servlet>
+    <description></description>
+    <display-name>Log4jInit</display-name>
+    <servlet-name>Log4jInit</servlet-name>
+    <servlet-class>com.swaroop.jstatui.servlet.Log4jInit</servlet-class>
+    <init-param>
+      <description></description>
+      <param-name>log4j-init-file</param-name>
+      <param-value>WEB-INF/classes/com/swaroop/jstatui/resource/log4j.properties</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Log4jInit</servlet-name>
+    <url-pattern>/log4jinit</url-pattern>
+  </servlet-mapping>
 </web-app>

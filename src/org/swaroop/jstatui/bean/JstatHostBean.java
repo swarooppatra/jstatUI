@@ -14,7 +14,7 @@ import org.swaroop.jstatui.annotations.Table;
  * @author Swaroop Patra
  * 
  */
-@Table(name = "jstat_table")
+@Table(name = "jstat_host")
 public class JstatHostBean implements Serializable, Comparable<JstatHostBean>,
 		JstatOptionBean {
 

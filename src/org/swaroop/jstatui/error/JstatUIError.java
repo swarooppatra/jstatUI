@@ -15,18 +15,50 @@ import java.util.Map;
  */
 public class JstatUIError {
 
-	private static Map<Integer, String> errors = new HashMap<Integer, String>();
+  private static Map<Integer, String> errors = new HashMap<Integer, String>();
 
-	public JstatUIError(int errorCode, String messgae) {
-		errors.put(errorCode, messgae);
-	}
+  private final String SESSION_ID;
 
-	public static Map<Integer, String> getErrors() {
-		return errors;
-	}
+  public JstatUIError(String sessionID) {
+    SESSION_ID = sessionID;
+  }
 
-	public static int getErroCounts() {
-		return errors.size();
-	}
+  /**
+   * Returns errors
+   * 
+   * @return Map of error code and error message
+   */
+  public static Map<Integer, String> getErrors() {
+    return errors;
+  }
 
+  /**
+   * Add an error to global error object
+   * 
+   * @param errorCode
+   *          User provided error code
+   * @param messgae
+   *          User provided error message
+   */
+  public static void addErrors(int errorCode, String messgae) {
+    errors.put(errorCode, messgae);
+  }
+
+  /**
+   * Returns total number of errors present in current session
+   * 
+   * @return Number of errors
+   */
+  public static int getErroCounts() {
+    return errors.size();
+  }
+
+  /**
+   * Returns SESSION ID for this object
+   * 
+   * @return Request SESSION ID
+   */
+  public String getSessionID() {
+    return SESSION_ID;
+  }
 }

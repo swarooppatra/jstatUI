@@ -1,0 +1,9 @@
+ERROR CODE	ERROR MESSAGE
+----------	-------------
+600			Invalid value passed to a method/costructor
+601			Annotation related error
+602			OS process related error
+603			Error in I/O operation
+604			Error related to JNDI resource
+605			Driver class not found
+606			Error in JDBC

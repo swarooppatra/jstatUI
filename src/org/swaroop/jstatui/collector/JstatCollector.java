@@ -16,7 +16,7 @@ public class JstatCollector implements Callable<JstatCollector> {
   // jstat -class -t -h<hdr_repeat> <pid> <interval> <sample>
   private String statType = "";
 
-  private final int PID = 0;
+  private final int PID;
 
   private static final int SAMPLE_INTERVAL = 500;
 

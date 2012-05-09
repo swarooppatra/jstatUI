@@ -7,3 +7,4 @@ ERROR CODE	ERROR MESSAGE
 604			Error related to JNDI resource
 605			Driver class not found
 606			Error in JDBC
+607			Class not Found

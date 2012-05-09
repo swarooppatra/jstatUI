@@ -19,4 +19,24 @@ IMPT:
 
 This project is under development. Trying to run may lead to unexpected results.
 
-This is project has to be executed from Linux. It doesn't support Windows as of now. 
+This is project has to be executed from Linux. It doesn't support Windows as of now.
+
+Starting jstatd
+================
+
+> jstatd -J-Djava.security.policy=jstatd.all.policy
+
+file:jstatd.all.policy
+=======================
+grant codebase "file:${java.home}/../lib/tools.jar" {
+
+   permission java.security.AllPermission;
+
+};
+
+
+Using jstat command line
+=======================
+
+> jstat -class -t -h<hdr_repeat> <pid> <interval> <sample>
+> jstat -gc -t -h<hdr_repeat> <pid> <interval> <sample> 

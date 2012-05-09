@@ -19,4 +19,15 @@ IMPT:
 
 This project is under development. Trying to run may lead to unexpected results.
 
-This is project has to be executed from Linux. It doesn't support Windows as of now. 
+This is project has to be executed from Linux. It doesn't support Windows as of now.
+
+Starting jstatd
+================
+
+> jstatd -J-Djava.security.policy=jstatd.all.policy
+
+Using jstat command line
+=======================
+
+> jstat -class -t -h30 15098 500 10
+> jstat -class -gc -gccapacity -t -h30 15098 2000 10 

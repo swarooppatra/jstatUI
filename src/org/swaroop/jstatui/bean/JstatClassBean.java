@@ -17,6 +17,8 @@ public class JstatClassBean implements JstatOptionBean, Serializable,
 		Comparable<JstatClassBean> {
 
 	private static final long serialVersionUID = 1L;
+	
+	private static final String STAT_COLUMN_SCHEMA = "";
 
 	@Column(name = "id", isPrimary = true)
 	private int id;
@@ -225,5 +227,11 @@ public class JstatClassBean implements JstatOptionBean, Serializable,
 	public int compareTo(JstatClassBean o) {
 		return id - o.id;
 	}
+
+  @Override
+  public JstatOptionBean parseStat(String stat) {
+    String[] stats = stat.split(",");
+    return null;
+  }
 
 }

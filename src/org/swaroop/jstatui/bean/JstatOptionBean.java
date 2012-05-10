@@ -11,4 +11,5 @@ package org.swaroop.jstatui.bean;
  * 
  */
 public interface JstatOptionBean {
+  JstatOptionBean parseStat(String stat);
 }

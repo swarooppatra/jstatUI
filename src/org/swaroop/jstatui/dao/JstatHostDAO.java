@@ -3,7 +3,6 @@
  */
 package org.swaroop.jstatui.dao;
 
-import org.apache.catalina.Session;
 import org.apache.log4j.Logger;
 import org.swaroop.jstatui.bean.JstatHostBean;
 import org.swaroop.jstatui.error.JstatUIError;

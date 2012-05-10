@@ -7,6 +7,7 @@ CREATE TABLE `jstatui`.`jstat_host` (
   `port` INTEGER UNSIGNED NOT NULL,
   `jvm_process_id` VARCHAR(45) NOT NULL,
   `jvm_start_time` TIMESTAMP NOT NULL,
+  `active` TINYINT UNSIGNED NOT NULL DEFAULT 0,
   PRIMARY KEY(`id`),
   UNIQUE `unique_indx` (`host`, `port`, `jvm_process_id`, `jvm_start_time`)
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8;

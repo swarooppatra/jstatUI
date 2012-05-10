@@ -1,11 +1,10 @@
 /**
  * Created on May 8, 2012
  */
-package com.swaroop.jstatui.dao;
+package org.swaroop.jstatui.dao;
 
 import org.apache.log4j.PropertyConfigurator;
 import org.swaroop.jstatui.bean.JstatClassBean;
-import org.swaroop.jstatui.dao.JstatClassDAO;
 
 /**
  * Tests for JstatHostDAO operations

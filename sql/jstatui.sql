@@ -16,12 +16,12 @@ DROP TABLE IF EXISTS `jstatui`.`jstat_class`;
 CREATE TABLE `jstatui`.`jstat_class` (
   `id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   `host_id` INTEGER UNSIGNED NOT NULL,
-  `time_elasped` INTEGER UNSIGNED NOT NULL,
+  `time_elasped` FLOAT UNSIGNED NOT NULL,
   `loaded_classes` INTEGER DEFAULT -9,
-  `loaded_bytes` INTEGER DEFAULT -9,
+  `loaded_bytes` FLOAT DEFAULT -9,
   `unloaded_classes` INTEGER DEFAULT -9,
-  `unloaded_bytes` INTEGER DEFAULT -9,
-  `time_consumed` INTEGER DEFAULT -9,
+  `unloaded_bytes` FLOAT DEFAULT -9,
+  `time_consumed` FLOAT DEFAULT -9,
   PRIMARY KEY(`id`),
   CONSTRAINT `FK_jstat_class_jstat_host` FOREIGN KEY `FK_jstat_class_jstat_host` (`host_id`)
     REFERENCES `jstat_host` (`id`)

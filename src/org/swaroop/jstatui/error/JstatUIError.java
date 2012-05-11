@@ -15,6 +15,7 @@ import java.util.Map;
  */
 public class JstatUIError {
 
+  // TODO : reconsider to use some other error storage.
   private static Map<Integer, String> errors = new HashMap<Integer, String>();
 
   private final String SESSION_ID;

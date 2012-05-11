@@ -34,7 +34,7 @@ public class JstatClassDAO {
       JstatUIError.addErrors(600, "Invalid JstatHostBean object");
       return inserted;
     }
-    inserted = ORMProcessor.insertABean(bean);
+    //inserted = ORMProcessor.insertABean(bean);
     log.info("Insertion status : " + inserted);
     return inserted;
   }

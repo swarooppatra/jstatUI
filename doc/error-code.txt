@@ -8,3 +8,5 @@ ERROR CODE	ERROR MESSAGE
 605			Driver class not found
 606			Error in JDBC
 607			Class not Found
+608			Error in parsing stats
+609			OS not yet supported

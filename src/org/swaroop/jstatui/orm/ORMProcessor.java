@@ -12,7 +12,6 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.swaroop.jstatui.annotations.Column;
 import org.swaroop.jstatui.bean.JstatOptionBean;
-import org.swaroop.jstatui.db.DBConnection;
 import org.swaroop.jstatui.error.JstatUIError;
 import org.swaroop.jstatui.util.AnnotationUtil;
 
@@ -26,8 +25,6 @@ import org.swaroop.jstatui.util.AnnotationUtil;
 public abstract class ORMProcessor {
 
   private static final Logger log = Logger.getLogger("jstatui");
-
-  private static DBConnection dbConn = new DBConnection();
 
   private static final char WHITE_SPACE = ' ';
 
@@ -47,10 +44,11 @@ public abstract class ORMProcessor {
    *          An object of type JstatOptionBean
    * @return A boolean indicating a record was inserted successfully or not
    */
-  public static boolean insertABean(JstatOptionBean bean) {
+  // TODO : if bean doesn't contains proper value then stop fire query
+  public static boolean insertABean(JstatOptionBean bean, Connection conn) {
     log.info("Staring ORM operations");
     boolean inserted = false;
-    if (bean == null) {
+    if (bean == null || conn == null) {
       log.error("Invalid bean value passed");
       JstatUIError.addErrors(600, "Invalid bean value passed");
       return inserted;
@@ -98,11 +96,9 @@ public abstract class ORMProcessor {
     SQL.append(CHAR_OPEN_BRACKET);
     SQL.append(columnValues);
     SQL.append(CHAR_CLOSE_BRACKET);
-    System.out.println("QUERY :: " + SQL.toString());
+    log.info("QUERY :: " + SQL.toString());
 
-    Connection conn = null;
     Statement stmt = null;
-    conn = dbConn.getConnection();
     try {
       stmt = conn.createStatement();
       stmt.execute(SQL.toString());

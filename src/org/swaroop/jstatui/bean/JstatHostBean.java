@@ -36,7 +36,7 @@ public class JstatHostBean implements Serializable, Comparable<JstatHostBean>,
   private String jvmStartTime;
 
   @Column(name = "active")
-  private String active;
+  private short active;
 
   /**
    * @return the id
@@ -116,7 +116,7 @@ public class JstatHostBean implements Serializable, Comparable<JstatHostBean>,
   /**
    * @return the active
    */
-  public String getActive() {
+  public short getActive() {
     return active;
   }
 
@@ -124,7 +124,7 @@ public class JstatHostBean implements Serializable, Comparable<JstatHostBean>,
    * @param active
    *          the active to set
    */
-  public void setActive(String active) {
+  public void setActive(short active) {
     this.active = active;
   }
 

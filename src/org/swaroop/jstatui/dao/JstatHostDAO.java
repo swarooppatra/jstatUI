@@ -6,7 +6,6 @@ package org.swaroop.jstatui.dao;
 import org.apache.log4j.Logger;
 import org.swaroop.jstatui.bean.JstatHostBean;
 import org.swaroop.jstatui.error.JstatUIError;
-import org.swaroop.jstatui.orm.ORMProcessor;
 
 /**
  * This DAO corresponds to jstatui.jstat_host table and JstatHostBean
@@ -36,7 +35,7 @@ public class JstatHostDAO {
       JstatUIError.addErrors(600, "Invalid JstatHostBean object");
       return inserted;
     }
-    inserted = ORMProcessor.insertABean(bean);
+    //inserted = ORMProcessor.insertABean(bean);
     log.info("Insertion status : " + inserted);
     return inserted;
   }

@@ -3,8 +3,80 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Welcome to JstatUI</title>
+		<style type="text/css">
+			p.css-vertical-text {
+				position:absolute;
+				left:7px;
+				top:220px;
+				color:#333;
+				border:0px solid red;
+				writing-mode:tb-rl;
+				-webkit-transform:rotate(-90deg);
+				-moz-transform:rotate(-90deg);
+				-o-transform: rotate(-90deg);
+				white-space:nowrap;
+				display:block;
+				bottom:0;
+				width:20px;
+				height:20px;
+				font-family:'Trebuchet MS', Helvetica, sans-serif;
+				font-size:24px;
+				font-weight:normal;
+				text-shadow: 0px 0px 1px #333;
+			}
+		</style>
 	</head>
 	<body>
 		<h1>Welcome to JstatUI</h1>
+		<canvas id="exptCanvas" height="300" width="800" >
+			Your browser does not support the canvas element.
+		</canvas>
+		<p class="css-vertical-text">Statistics</p>
+		<script type="text/javascript">
+			var cvs = document.getElementById("exptCanvas");
+			var ctx = cvs.getContext("2d");
+			ctx.lineWidth=5;
+			ctx.moveTo(0,0);
+			ctx.lineTo(0,300);
+			ctx.lineTo(800,300);
+			ctx.lineTo(800,0);
+			ctx.lineTo(0,0);
+			ctx.strokeStyle="blue";
+			ctx.stroke();
+			ctx.lineWidth=1;
+			ctx.moveTo(25,0);
+			ctx.lineTo(25,275);
+			ctx.lineTo(800,275);
+			ctx.strokeStyle="red";
+			ctx.stroke();
+			ctx.font="24px Helvetica";
+			ctx.fillStyle = "#333333";
+			ctx.shadowColor="#333333";
+			ctx.shadowOffsetX=1;
+			ctx.shadowOffsetY=1;
+			ctx.shadowBlur=1;
+			ctx.fillText("Time", 720, 295);
+			ctx.beginPath();
+			var i=0;
+			for(i=5;i<300;i++){
+				ctx.lineTo((i*5),Math.floor((Math.random()*200)+1));
+			}
+			ctx.strokeStyle="orange";
+			ctx.shadowColor="orange";
+			ctx.shadowOffsetX=.25;
+			ctx.shadowOffsetY=.25;
+			ctx.shadowBlur=.25;
+			ctx.stroke();
+			ctx.beginPath();
+			for(i=5;i<300;i++){
+				ctx.lineTo((i*5),Math.floor((Math.random()*200)+1));
+			}
+			ctx.strokeStyle="green";
+			ctx.shadowColor="green";
+			ctx.shadowOffsetX=.25;
+			ctx.shadowOffsetY=.25;
+			ctx.shadowBlur=.25;
+			ctx.stroke();
+		</script>
 	</body>
 </html>

@@ -24,8 +24,6 @@ public class JstatMain {
 
   public static ExecutorService service = null;
 
-  private static JstatCollector collector = null;
-
   /**
    * Start the collection process by spawning new thread for each kind of jstat
    * collection
@@ -36,10 +34,14 @@ public class JstatMain {
    */
   public void start(JstatHostBean host) {
     log.info("Spawning thread to start stat collection");
-    JstatCollector collector = new JstatCollector(host, JStatsOptions.CLASS);
-    FutureTask<JstatCollector> ft = new FutureTask<JstatCollector>(collector);
-    service = Executors.newSingleThreadExecutor();
-    service.submit(ft);
+    JStatOptions[] options = JStatOptions.values();
+    for (JStatOptions option : options) {
+      JstatCollector collector = new JstatCollector(host, option);
+      FutureTask<JstatCollector> ft = new FutureTask<JstatCollector>(collector);
+      service = Executors.newSingleThreadExecutor();
+      service.submit(ft);
+    }
+
   }
 
   /**
@@ -49,7 +51,6 @@ public class JstatMain {
    *          Executor service to stop
    */
   public static void shutdownAndAwaitTermination(ExecutorService pool) {
-    collector = null;
     log.info("Stopping executor service...");
     pool.shutdown(); // Disable new tasks from being submitted
     try {
@@ -78,8 +79,8 @@ public class JstatMain {
     host.setActive((short) 1);
     host.setHost("localhost");
     host.setId(1);
-    host.setJvmProcessId(9512);
-    host.setJvmStartTime("2012-05-11 01:00:00");
+    host.setJvmProcessId(5804);
+    host.setJvmStartTime("2012-05-15 01:00:00");
     host.setPort(1099);
     boolean running = ProcessUtil.checkProcessStatus("localhost",
         host.getJvmProcessId());

@@ -1,5 +1,5 @@
 /**
- * Created on May 3, 2012
+ * Created on May 15, 2012
  */
 package org.swaroop.jstatui.bean;
 
@@ -12,18 +12,19 @@ import org.swaroop.jstatui.annotations.Table;
 import org.swaroop.jstatui.error.JstatUIError;
 
 /**
- * This bean corresponds to jstat_class table and -class o/p option of jstat
+ * This class corresponds to jstat_printcompilation table and -printcompilation
+ * output option of jstat
  * 
  * @author Swaroop Patra
  * 
  */
-@Table(name = "jstat_class")
-public class JstatClassBean implements JstatOptionBean, Serializable,
-    Comparable<JstatClassBean> {
+@Table(name = "jstat_printcompilation")
+public class JstatPrintCompilatinBean implements Serializable,
+    Comparable<JstatPrintCompilatinBean>, JstatOptionBean {
 
   private static final long serialVersionUID = 1L;
 
-  private static final String STAT_COLUMN_SCHEMA = "timeElasped::loadedClasses::loadedBytes::unloadedClasses::unloadedBytes::timeConsumed";
+  private static final String STAT_COLUMN_SCHEMA = "timeElasped::Compiled::Size::Type::Method";
 
   @Column(name = "id", isPrimary = true)
   private int id;
@@ -34,20 +35,17 @@ public class JstatClassBean implements JstatOptionBean, Serializable,
   @Column(name = "time_elasped")
   private float timeElasped;
 
-  @Column(name = "loaded_classes")
-  private long loadedClasses;
+  @Column(name = "compiled")
+  private int compiled;
 
-  @Column(name = "loaded_bytes")
-  private float loadedBytes;
+  @Column(name = "size")
+  private int size;
 
-  @Column(name = "unloaded_classes")
-  private long unloadedClasses;
+  @Column(name = "type")
+  private int type;
 
-  @Column(name = "unloaded_bytes")
-  private float unloadedBytes;
-
-  @Column(name = "time_consumed")
-  private float timeConsumed;
+  @Column(name = "method")
+  private String method;
 
   /**
    * @return the id
@@ -95,78 +93,63 @@ public class JstatClassBean implements JstatOptionBean, Serializable,
   }
 
   /**
-   * @return the loadedClasses
+   * @return the compiled
    */
-  public long getLoadedClasses() {
-    return loadedClasses;
+  public int getCompiled() {
+    return compiled;
   }
 
   /**
-   * @param loadedClasses
-   *          the loadedClasses to set
+   * @param compiled
+   *          the compiled to set
    */
-  public void setLoadedClasses(long loadedClasses) {
-    this.loadedClasses = loadedClasses;
+  public void setCompiled(int compiled) {
+    this.compiled = compiled;
   }
 
   /**
-   * @return the loadedBytes
+   * @return the size
    */
-  public float getLoadedBytes() {
-    return loadedBytes;
+  public int getSize() {
+    return size;
   }
 
   /**
-   * @param loadedBytes
-   *          the loadedBytes to set
+   * @param size
+   *          the size to set
    */
-  public void setLoadedBytes(float loadedBytes) {
-    this.loadedBytes = loadedBytes;
+  public void setSize(int size) {
+    this.size = size;
   }
 
   /**
-   * @return the unloadedClasses
+   * @return the type
    */
-  public long getUnloadedClasses() {
-    return unloadedClasses;
+  public int getType() {
+    return type;
   }
 
   /**
-   * @param unloadedClasses
-   *          the unloadedClasses to set
+   * @param type
+   *          the type to set
    */
-  public void setUnloadedClasses(long unloadedClasses) {
-    this.unloadedClasses = unloadedClasses;
+  public void setType(int type) {
+    this.type = type;
   }
 
   /**
-   * @return the unloadedBytes
+   * @return the method
    */
-  public float getUnloadedBytes() {
-    return unloadedBytes;
+  public String getMethod() {
+    return method;
   }
 
   /**
-   * @param unloadedBytes
-   *          the unloadedBytes to set
+   * @param method
+   *          the method to set
    */
-  public void setUnloadedBytes(float unloadedBytes) {
-    this.unloadedBytes = unloadedBytes;
-  }
-
-  /**
-   * @return the timeConsumed
-   */
-  public float getTimeConsumed() {
-    return timeConsumed;
-  }
-
-  /**
-   * @param timeConsumed
-   *          the timeConsumed to set
-   */
-  public void setTimeConsumed(float timeConsumed) {
-    this.timeConsumed = timeConsumed;
+  public void setMethod(String method) {
+    this.method = method;
   }
 
   /*
@@ -195,7 +178,7 @@ public class JstatClassBean implements JstatOptionBean, Serializable,
       return false;
     if (getClass() != obj.getClass())
       return false;
-    JstatClassBean other = (JstatClassBean) obj;
+    JstatPrintCompilatinBean other = (JstatPrintCompilatinBean) obj;
     if (id != other.id)
       return false;
     return true;
@@ -209,26 +192,30 @@ public class JstatClassBean implements JstatOptionBean, Serializable,
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-    builder.append("JstatClassBean [id=");
+    builder.append("JstatPrintCompilatinBean [id=");
     builder.append(id);
     builder.append(", hostID=");
     builder.append(hostID);
     builder.append(", timeElasped=");
     builder.append(timeElasped);
-    builder.append(", loadedClasses=");
-    builder.append(loadedClasses);
-    builder.append(", loadedBytes=");
-    builder.append(loadedBytes);
-    builder.append(", unloadedClasses=");
-    builder.append(unloadedClasses);
-    builder.append(", unloadedBytes=");
-    builder.append(unloadedBytes);
-    builder.append(", timeConsumed=");
-    builder.append(timeConsumed);
+    builder.append(", compiled=");
+    builder.append(compiled);
+    builder.append(", size=");
+    builder.append(size);
+    builder.append(", type=");
+    builder.append(type);
+    builder.append(", method=");
+    builder.append(method);
     builder.append("]");
     return builder.toString();
   }
 
+  // Compiled Size Type Method
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.swaroop.jstatui.bean.JstatOptionBean#parseStat(java.lang.String)
+   */
   @Override
   public JstatOptionBean parseStat(String stat) {
     log.info("Parsing collected stats");
@@ -238,7 +225,7 @@ public class JstatClassBean implements JstatOptionBean, Serializable,
       // TODO : need to change to a bean object
       return null;
     }
-    JstatClassBean bean = new JstatClassBean();
+    JstatPrintCompilatinBean bean = new JstatPrintCompilatinBean();
     String[] stats = stat.trim().split("[\\s\\t]+");
     String[] columns = STAT_COLUMN_SCHEMA.split("::");
     Map<String, String> columnValueMap = new HashMap<String, String>();
@@ -247,13 +234,10 @@ public class JstatClassBean implements JstatOptionBean, Serializable,
         columnValueMap.put(columns[i], stats[i]);
       }
       bean.setTimeElasped(Float.parseFloat(columnValueMap.get("timeElasped")));
-      bean.setLoadedClasses(Long.parseLong(columnValueMap.get("loadedClasses")));
-      bean.setLoadedBytes(Float.parseFloat(columnValueMap.get("loadedBytes")));
-      bean.setUnloadedClasses(Long.parseLong(columnValueMap
-          .get("unloadedClasses")));
-      bean.setUnloadedBytes(Float.parseFloat(columnValueMap
-          .get("unloadedBytes")));
-      bean.setTimeConsumed(Float.parseFloat(columnValueMap.get("timeConsumed")));
+      bean.setCompiled(Integer.parseInt(columnValueMap.get("Compiled")));
+      bean.setSize(Integer.parseInt(columnValueMap.get("Size")));
+      bean.setType(Integer.parseInt(columnValueMap.get("Type")));
+      bean.setMethod(columnValueMap.get("Method"));
     } else {
       log.error("Error in parsing stats");
       JstatUIError.addErrors(608, "Error in parsing stats");
@@ -261,7 +245,13 @@ public class JstatClassBean implements JstatOptionBean, Serializable,
     return bean;
   }
 
-  public int compareTo(JstatClassBean o) {
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.lang.Comparable#compareTo(java.lang.Object)
+   */
+  @Override
+  public int compareTo(JstatPrintCompilatinBean o) {
     return id - o.id;
   }
 

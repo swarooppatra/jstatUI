@@ -9,7 +9,7 @@ package org.swaroop.jstatui.collector;
  * @author Swaroop Patra
  * 
  */
-public enum JStatsOptions {
+public enum JStatOptions {
   CLASS("class"), COMPILER("compiler"), GC("gc"), GC_CAPACITY("gccapacity"), GC_CAUSE(
       "gccause"), GC_NEW("gcnew"), GC_NEW_CAPACITY("gcnewcapacity"), GC_OLD(
       "gcold"), GC_OLD_CAPACITY("gcoldcapacity"), GC_PERM_CAPACITY(
@@ -18,7 +18,7 @@ public enum JStatsOptions {
 
   private String statType;
 
-  private JStatsOptions(String statType) {
+  private JStatOptions(String statType) {
     this.statType = statType;
   }
 

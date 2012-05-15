@@ -33,16 +33,11 @@
 		</canvas>
 		<p class="css-vertical-text">Statistics</p>
 		<script type="text/javascript">
+			var xOffset = 25;
+			var yMax = 275;
+			var data=[[2,4], [34,56], [133,67], [180,54], [239,120], [240,34], [300,98], [350,100], [400,250], [450,123], [500,178]];			
 			var cvs = document.getElementById("exptCanvas");
 			var ctx = cvs.getContext("2d");
-			ctx.lineWidth=5;
-			ctx.moveTo(0,0);
-			ctx.lineTo(0,300);
-			ctx.lineTo(800,300);
-			ctx.lineTo(800,0);
-			ctx.lineTo(0,0);
-			ctx.strokeStyle="blue";
-			ctx.stroke();
 			ctx.lineWidth=1;
 			ctx.moveTo(25,0);
 			ctx.lineTo(25,275);
@@ -58,8 +53,9 @@
 			ctx.fillText("Time", 720, 295);
 			ctx.beginPath();
 			var i=0;
-			for(i=5;i<300;i++){
-				ctx.lineTo((i*5),Math.floor((Math.random()*200)+1));
+			console.log(data.length-1);			
+			for(i=0;i<data.length-1;i++){
+				ctx.lineTo(xOffset+data[i][0],yMax - data[i][1]);
 			}
 			ctx.strokeStyle="orange";
 			ctx.shadowColor="orange";
@@ -68,8 +64,8 @@
 			ctx.shadowBlur=.25;
 			ctx.stroke();
 			ctx.beginPath();
-			for(i=5;i<300;i++){
-				ctx.lineTo((i*5),Math.floor((Math.random()*200)+1));
+			for(i=0;i<data.length-1;i++){
+				ctx.lineTo(xOffset+data[i][0], data[i][1]);
 			}
 			ctx.strokeStyle="green";
 			ctx.shadowColor="green";

@@ -10,3 +10,4 @@ ERROR CODE	ERROR MESSAGE
 607			Class not Found
 608			Error in parsing stats
 609			OS not yet supported
+610			Reflection Error

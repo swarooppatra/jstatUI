@@ -5,3 +5,5 @@
 /bin
 /.project
 /.apt_generated
+/dist
+/.factorypath

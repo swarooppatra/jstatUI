@@ -16,4 +16,5 @@ public interface JstatOptionBean {
   static final Logger log = Logger.getLogger("jstatui");
 
   JstatOptionBean parseStat(String stat);
+  String toJsonString();
 }

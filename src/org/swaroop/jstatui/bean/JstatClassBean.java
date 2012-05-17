@@ -208,25 +208,49 @@ public class JstatClassBean implements JstatOptionBean, Serializable,
    */
   @Override
   public String toString() {
-    StringBuilder builder = new StringBuilder();
-    builder.append("JstatClassBean [id=");
-    builder.append(id);
-    builder.append(", hostID=");
-    builder.append(hostID);
-    builder.append(", timeElasped=");
-    builder.append(timeElasped);
-    builder.append(", loadedClasses=");
-    builder.append(loadedClasses);
-    builder.append(", loadedBytes=");
-    builder.append(loadedBytes);
-    builder.append(", unloadedClasses=");
-    builder.append(unloadedClasses);
-    builder.append(", unloadedBytes=");
-    builder.append(unloadedBytes);
-    builder.append(", timeConsumed=");
-    builder.append(timeConsumed);
-    builder.append("]");
-    return builder.toString();
+    StringBuffer buffer = new StringBuffer();
+    buffer.append("JstatClassBean [id=");
+    buffer.append(id);
+    buffer.append(", hostID=");
+    buffer.append(hostID);
+    buffer.append(", timeElasped=");
+    buffer.append(timeElasped);
+    buffer.append(", loadedClasses=");
+    buffer.append(loadedClasses);
+    buffer.append(", loadedBytes=");
+    buffer.append(loadedBytes);
+    buffer.append(", unloadedClasses=");
+    buffer.append(unloadedClasses);
+    buffer.append(", unloadedBytes=");
+    buffer.append(unloadedBytes);
+    buffer.append(", timeConsumed=");
+    buffer.append(timeConsumed);
+    buffer.append("]");
+    return buffer.toString();
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.swaroop.jstatui.bean.JstatOptionBean#getJsonString()
+   */
+  @Override
+  public String toJsonString() {
+    StringBuffer buffer = new StringBuffer();
+    buffer.append("[");
+    buffer.append(timeElasped);
+    buffer.append(",");
+    buffer.append(loadedClasses);
+    buffer.append(",");
+    buffer.append(loadedBytes);
+    buffer.append(",");
+    buffer.append(unloadedClasses);
+    buffer.append(",");
+    buffer.append(unloadedBytes);
+    buffer.append(",");
+    buffer.append(timeConsumed);
+    buffer.append("]");
+    return buffer.toString();
   }
 
   @Override

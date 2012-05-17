@@ -167,19 +167,39 @@ public class JstatHostBean implements Serializable, Comparable<JstatHostBean>,
    */
   @Override
   public String toString() {
-    StringBuilder builder = new StringBuilder();
-    builder.append("JstatHostBean [id=");
-    builder.append(id);
-    builder.append(", host=");
-    builder.append(host);
-    builder.append(", port=");
-    builder.append(port);
-    builder.append(", jvmProcessId=");
-    builder.append(jvmProcessId);
-    builder.append(", jvmStartTime=");
-    builder.append(jvmStartTime);
-    builder.append("]");
-    return builder.toString();
+    StringBuffer buffer = new StringBuffer();
+    buffer.append("JstatHostBean [id=");
+    buffer.append(id);
+    buffer.append(", host=");
+    buffer.append(host);
+    buffer.append(", port=");
+    buffer.append(port);
+    buffer.append(", jvmProcessId=");
+    buffer.append(jvmProcessId);
+    buffer.append(", jvmStartTime=");
+    buffer.append(jvmStartTime);
+    buffer.append("]");
+    return buffer.toString();
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.swaroop.jstatui.bean.JstatOptionBean#toJsonString()
+   */
+  @Override
+  public String toJsonString() {
+    StringBuffer buffer = new StringBuffer();
+    buffer.append("[");
+    buffer.append(host);
+    buffer.append(",");
+    buffer.append(port);
+    buffer.append(",");
+    buffer.append(jvmProcessId);
+    buffer.append(",");
+    buffer.append(jvmStartTime);
+    buffer.append("]");
+    return buffer.toString();
   }
 
   @Override

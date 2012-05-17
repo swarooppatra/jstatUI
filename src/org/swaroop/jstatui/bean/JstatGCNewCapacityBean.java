@@ -317,37 +317,73 @@ public class JstatGCNewCapacityBean implements Serializable,
    */
   @Override
   public String toString() {
-    StringBuilder builder = new StringBuilder();
-    builder.append("JstatGCNewCapacityBean [id=");
-    builder.append(id);
-    builder.append(", hostID=");
-    builder.append(hostID);
-    builder.append(", timeElasped=");
-    builder.append(timeElasped);
-    builder.append(", NGCMN=");
-    builder.append(NGCMN);
-    builder.append(", NGCMX=");
-    builder.append(NGCMX);
-    builder.append(", NGC=");
-    builder.append(NGC);
-    builder.append(", S0CMX=");
-    builder.append(S0CMX);
-    builder.append(", S0C=");
-    builder.append(S0C);
-    builder.append(", S1CMX=");
-    builder.append(S1CMX);
-    builder.append(", S1C=");
-    builder.append(S1C);
-    builder.append(", ECMX=");
-    builder.append(ECMX);
-    builder.append(", EC=");
-    builder.append(EC);
-    builder.append(", YGC=");
-    builder.append(YGC);
-    builder.append(", FGC=");
-    builder.append(FGC);
-    builder.append("]");
-    return builder.toString();
+    StringBuffer buffer = new StringBuffer();
+    buffer.append("JstatGCNewCapacityBean [id=");
+    buffer.append(id);
+    buffer.append(", hostID=");
+    buffer.append(hostID);
+    buffer.append(", timeElasped=");
+    buffer.append(timeElasped);
+    buffer.append(", NGCMN=");
+    buffer.append(NGCMN);
+    buffer.append(", NGCMX=");
+    buffer.append(NGCMX);
+    buffer.append(", NGC=");
+    buffer.append(NGC);
+    buffer.append(", S0CMX=");
+    buffer.append(S0CMX);
+    buffer.append(", S0C=");
+    buffer.append(S0C);
+    buffer.append(", S1CMX=");
+    buffer.append(S1CMX);
+    buffer.append(", S1C=");
+    buffer.append(S1C);
+    buffer.append(", ECMX=");
+    buffer.append(ECMX);
+    buffer.append(", EC=");
+    buffer.append(EC);
+    buffer.append(", YGC=");
+    buffer.append(YGC);
+    buffer.append(", FGC=");
+    buffer.append(FGC);
+    buffer.append("]");
+    return buffer.toString();
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.swaroop.jstatui.bean.JstatOptionBean#toJsonString()
+   */
+  @Override
+  public String toJsonString() {
+    StringBuffer buffer = new StringBuffer();
+    buffer.append("[");
+    buffer.append(timeElasped);
+    buffer.append(",");
+    buffer.append(NGCMN);
+    buffer.append(",");
+    buffer.append(NGCMX);
+    buffer.append(",");
+    buffer.append(NGC);
+    buffer.append(",");
+    buffer.append(S0CMX);
+    buffer.append(",");
+    buffer.append(S0C);
+    buffer.append(",");
+    buffer.append(S1CMX);
+    buffer.append(",");
+    buffer.append(S1C);
+    buffer.append(",");
+    buffer.append(ECMX);
+    buffer.append(",");
+    buffer.append(EC);
+    buffer.append(",");
+    buffer.append(YGC);
+    buffer.append(",");
+    buffer.append(FGC);
+    buffer.append("]");
+    return buffer.toString();
   }
 
   /*

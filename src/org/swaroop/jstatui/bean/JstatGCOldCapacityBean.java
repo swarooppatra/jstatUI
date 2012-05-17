@@ -263,31 +263,38 @@ public class JstatGCOldCapacityBean implements Serializable,
    */
   @Override
   public String toString() {
-    StringBuilder builder = new StringBuilder();
-    builder.append("JstatGCOldCapacity [id=");
-    builder.append(id);
-    builder.append(", hostID=");
-    builder.append(hostID);
-    builder.append(", timeElasped=");
-    builder.append(timeElasped);
-    builder.append(", OGCMN=");
-    builder.append(OGCMN);
-    builder.append(", OGCMX=");
-    builder.append(OGCMX);
-    builder.append(", OGC=");
-    builder.append(OGC);
-    builder.append(", OC=");
-    builder.append(OC);
-    builder.append(", YGC=");
-    builder.append(YGC);
-    builder.append(", FGC=");
-    builder.append(FGC);
-    builder.append(", FGCT=");
-    builder.append(FGCT);
-    builder.append(", GCT=");
-    builder.append(GCT);
-    builder.append("]");
-    return builder.toString();
+    StringBuffer buffer = new StringBuffer();
+    buffer.append("[");
+    buffer.append(timeElasped);
+    buffer.append(",");
+    buffer.append(OGCMN);
+    buffer.append(",");
+    buffer.append(OGCMX);
+    buffer.append(",");
+    buffer.append(OGC);
+    buffer.append(",");
+    buffer.append(OC);
+    buffer.append(",");
+    buffer.append(YGC);
+    buffer.append(",");
+    buffer.append(FGC);
+    buffer.append(",");
+    buffer.append(FGCT);
+    buffer.append(",");
+    buffer.append(GCT);
+    buffer.append("]");
+    return buffer.toString();
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.swaroop.jstatui.bean.JstatOptionBean#toJsonString()
+   */
+  @Override
+  public String toJsonString() {
+    // TODO Auto-generated method stub
+    return null;
   }
 
   /*

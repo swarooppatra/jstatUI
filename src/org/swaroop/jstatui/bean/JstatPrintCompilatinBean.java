@@ -191,26 +191,47 @@ public class JstatPrintCompilatinBean implements Serializable,
    */
   @Override
   public String toString() {
-    StringBuilder builder = new StringBuilder();
-    builder.append("JstatPrintCompilatinBean [id=");
-    builder.append(id);
-    builder.append(", hostID=");
-    builder.append(hostID);
-    builder.append(", timeElasped=");
-    builder.append(timeElasped);
-    builder.append(", compiled=");
-    builder.append(compiled);
-    builder.append(", size=");
-    builder.append(size);
-    builder.append(", type=");
-    builder.append(type);
-    builder.append(", method=");
-    builder.append(method);
-    builder.append("]");
-    return builder.toString();
+    StringBuffer buffer = new StringBuffer();
+    buffer.append("JstatPrintCompilatinBean [id=");
+    buffer.append(id);
+    buffer.append(", hostID=");
+    buffer.append(hostID);
+    buffer.append(", timeElasped=");
+    buffer.append(timeElasped);
+    buffer.append(", compiled=");
+    buffer.append(compiled);
+    buffer.append(", size=");
+    buffer.append(size);
+    buffer.append(", type=");
+    buffer.append(type);
+    buffer.append(", method=");
+    buffer.append(method);
+    buffer.append("]");
+    return buffer.toString();
   }
 
-  // Compiled Size Type Method
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.swaroop.jstatui.bean.JstatOptionBean#toJsonString()
+   */
+  @Override
+  public String toJsonString() {
+    StringBuffer buffer = new StringBuffer();
+    buffer.append("[");
+    buffer.append(timeElasped);
+    buffer.append(",");
+    buffer.append(compiled);
+    buffer.append(",");
+    buffer.append(size);
+    buffer.append(",");
+    buffer.append(type);
+    buffer.append(",");
+    buffer.append(method);
+    buffer.append("]");
+    return buffer.toString();
+  }
+
   /*
    * (non-Javadoc)
    * 

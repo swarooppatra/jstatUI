@@ -18,8 +18,9 @@
 		<war destfile="${dist}/JstatUI.war" webxml="WebContent/WEB-INF/web.xml">
 			<lib dir="${extlib}">
 				<include name="*.jar" />
-				<exclude name="xerces-2.6.2.jar" />
-				<exclude name="servlet-api-2.5-20081211.jar" />
+				<exclude name="jsp-api.jar" />
+				<exclude name="catalina.jar" />
+				<exclude name="servlet-api.jar" />
 			</lib>
 			<fileset dir="WebContent/">
 				<include name="**/*.tld" />
@@ -100,7 +101,7 @@
 	</target>
 
 	<!-- Build a Jar out of CoreServies classes  -->
-	<target name="all" depends="clean,compile,gen_annotation,dist" description="Complete Build">
+	<target name="all" depends="clean,compile,dist" description="Complete Build">
 		<delete dir="${build}" />
 	</target>
 

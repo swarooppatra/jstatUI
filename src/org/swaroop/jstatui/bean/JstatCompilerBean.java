@@ -227,27 +227,53 @@ public class JstatCompilerBean implements Serializable,
    */
   @Override
   public String toString() {
-    StringBuilder builder = new StringBuilder();
-    builder.append("JstatCompilerBean [id=");
-    builder.append(id);
-    builder.append(", hostID=");
-    builder.append(hostID);
-    builder.append(", timeElasped=");
-    builder.append(timeElasped);
-    builder.append(", compiled=");
-    builder.append(compiled);
-    builder.append(", failed=");
-    builder.append(failed);
-    builder.append(", invalid=");
-    builder.append(invalid);
-    builder.append(", timeSpent=");
-    builder.append(timeSpent);
-    builder.append(", failedType=");
-    builder.append(failedType);
-    builder.append(", failedMethod=");
-    builder.append(failedMethod);
-    builder.append("]");
-    return builder.toString();
+    StringBuffer buffer = new StringBuffer();
+    buffer.append("JstatCompilerBean [id=");
+    buffer.append(id);
+    buffer.append(", hostID=");
+    buffer.append(hostID);
+    buffer.append(", timeElasped=");
+    buffer.append(timeElasped);
+    buffer.append(", compiled=");
+    buffer.append(compiled);
+    buffer.append(", failed=");
+    buffer.append(failed);
+    buffer.append(", invalid=");
+    buffer.append(invalid);
+    buffer.append(", timeSpent=");
+    buffer.append(timeSpent);
+    buffer.append(", failedType=");
+    buffer.append(failedType);
+    buffer.append(", failedMethod=");
+    buffer.append(failedMethod);
+    buffer.append("]");
+    return buffer.toString();
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.swaroop.jstatui.bean.JstatOptionBean#getJsonString()
+   */
+  @Override
+  public String toJsonString() {
+    StringBuffer buffer = new StringBuffer();
+    buffer.append("[");
+    buffer.append(timeElasped);
+    buffer.append(",");
+    buffer.append(compiled);
+    buffer.append(",");
+    buffer.append(failed);
+    buffer.append(",");
+    buffer.append(invalid);
+    buffer.append(",");
+    buffer.append(timeSpent);
+    buffer.append(",");
+    buffer.append(failedType);
+    buffer.append(",");
+    buffer.append(failedMethod);
+    buffer.append("]");
+    return buffer.toString();
   }
 
   @Override

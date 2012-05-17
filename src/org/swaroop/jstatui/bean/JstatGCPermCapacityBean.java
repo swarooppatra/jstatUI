@@ -263,31 +263,61 @@ public class JstatGCPermCapacityBean implements Serializable,
    */
   @Override
   public String toString() {
-    StringBuilder builder = new StringBuilder();
-    builder.append("JstatGCPermCapacityBean [id=");
-    builder.append(id);
-    builder.append(", hostID=");
-    builder.append(hostID);
-    builder.append(", timeElasped=");
-    builder.append(timeElasped);
-    builder.append(", PGCMN=");
-    builder.append(PGCMN);
-    builder.append(", PGCMX=");
-    builder.append(PGCMX);
-    builder.append(", PGC=");
-    builder.append(PGC);
-    builder.append(", PC=");
-    builder.append(PC);
-    builder.append(", YGC=");
-    builder.append(YGC);
-    builder.append(", FGC=");
-    builder.append(FGC);
-    builder.append(", FGCT=");
-    builder.append(FGCT);
-    builder.append(", GCT=");
-    builder.append(GCT);
-    builder.append("]");
-    return builder.toString();
+    StringBuffer buffer = new StringBuffer();
+    buffer.append("JstatGCPermCapacityBean [id=");
+    buffer.append(id);
+    buffer.append(", hostID=");
+    buffer.append(hostID);
+    buffer.append(", timeElasped=");
+    buffer.append(timeElasped);
+    buffer.append(", PGCMN=");
+    buffer.append(PGCMN);
+    buffer.append(", PGCMX=");
+    buffer.append(PGCMX);
+    buffer.append(", PGC=");
+    buffer.append(PGC);
+    buffer.append(", PC=");
+    buffer.append(PC);
+    buffer.append(", YGC=");
+    buffer.append(YGC);
+    buffer.append(", FGC=");
+    buffer.append(FGC);
+    buffer.append(", FGCT=");
+    buffer.append(FGCT);
+    buffer.append(", GCT=");
+    buffer.append(GCT);
+    buffer.append("]");
+    return buffer.toString();
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.swaroop.jstatui.bean.JstatOptionBean#toJsonString()
+   */
+  @Override
+  public String toJsonString() {
+    StringBuffer buffer = new StringBuffer();
+    buffer.append("[");
+    buffer.append(timeElasped);
+    buffer.append(",");
+    buffer.append(PGCMN);
+    buffer.append(",");
+    buffer.append(PGCMX);
+    buffer.append(",");
+    buffer.append(PGC);
+    buffer.append(",");
+    buffer.append(PC);
+    buffer.append(",");
+    buffer.append(YGC);
+    buffer.append(",");
+    buffer.append(FGC);
+    buffer.append(",");
+    buffer.append(FGCT);
+    buffer.append(",");
+    buffer.append(GCT);
+    buffer.append("]");
+    return buffer.toString();
   }
 
   /*

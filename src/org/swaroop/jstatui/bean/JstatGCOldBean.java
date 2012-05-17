@@ -262,31 +262,61 @@ public class JstatGCOldBean implements Serializable,
    */
   @Override
   public String toString() {
-    StringBuilder builder = new StringBuilder();
-    builder.append("JstatGCOldBean [id=");
-    builder.append(id);
-    builder.append(", hostID=");
-    builder.append(hostID);
-    builder.append(", timeElasped=");
-    builder.append(timeElasped);
-    builder.append(", PC=");
-    builder.append(PC);
-    builder.append(", PU=");
-    builder.append(PU);
-    builder.append(", OC=");
-    builder.append(OC);
-    builder.append(", OU=");
-    builder.append(OU);
-    builder.append(", YGC=");
-    builder.append(YGC);
-    builder.append(", FGC=");
-    builder.append(FGC);
-    builder.append(", FGCT=");
-    builder.append(FGCT);
-    builder.append(", GCT=");
-    builder.append(GCT);
-    builder.append("]");
-    return builder.toString();
+    StringBuffer buffer = new StringBuffer();
+    buffer.append("JstatGCOldBean [id=");
+    buffer.append(id);
+    buffer.append(", hostID=");
+    buffer.append(hostID);
+    buffer.append(", timeElasped=");
+    buffer.append(timeElasped);
+    buffer.append(", PC=");
+    buffer.append(PC);
+    buffer.append(", PU=");
+    buffer.append(PU);
+    buffer.append(", OC=");
+    buffer.append(OC);
+    buffer.append(", OU=");
+    buffer.append(OU);
+    buffer.append(", YGC=");
+    buffer.append(YGC);
+    buffer.append(", FGC=");
+    buffer.append(FGC);
+    buffer.append(", FGCT=");
+    buffer.append(FGCT);
+    buffer.append(", GCT=");
+    buffer.append(GCT);
+    buffer.append("]");
+    return buffer.toString();
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.swaroop.jstatui.bean.JstatOptionBean#toJsonString()
+   */
+  @Override
+  public String toJsonString() {
+    StringBuffer buffer = new StringBuffer();
+    buffer.append("[");
+    buffer.append(timeElasped);
+    buffer.append(",");
+    buffer.append(PC);
+    buffer.append(",");
+    buffer.append(PU);
+    buffer.append(",");
+    buffer.append(OC);
+    buffer.append(",");
+    buffer.append(OU);
+    buffer.append(",");
+    buffer.append(YGC);
+    buffer.append(",");
+    buffer.append(FGC);
+    buffer.append(",");
+    buffer.append(FGCT);
+    buffer.append(",");
+    buffer.append(GCT);
+    buffer.append("]");
+    return buffer.toString();
   }
 
   /*

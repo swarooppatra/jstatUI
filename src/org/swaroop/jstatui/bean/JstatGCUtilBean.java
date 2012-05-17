@@ -18,7 +18,7 @@ import org.swaroop.jstatui.error.JstatUIError;
  * @author Swaroop Patra
  * 
  */
-@Table(name="jstat_gcutil")
+@Table(name = "jstat_gcutil")
 public class JstatGCUtilBean implements Serializable,
     Comparable<JstatGCUtilBean>, JstatOptionBean {
 
@@ -299,35 +299,69 @@ public class JstatGCUtilBean implements Serializable,
    */
   @Override
   public String toString() {
-    StringBuilder builder = new StringBuilder();
-    builder.append("JstatGCUtilBean [id=");
-    builder.append(id);
-    builder.append(", hostID=");
-    builder.append(hostID);
-    builder.append(", timeElasped=");
-    builder.append(timeElasped);
-    builder.append(", S0=");
-    builder.append(S0);
-    builder.append(", S1=");
-    builder.append(S1);
-    builder.append(", E=");
-    builder.append(E);
-    builder.append(", O=");
-    builder.append(O);
-    builder.append(", P=");
-    builder.append(P);
-    builder.append(", YGC=");
-    builder.append(YGC);
-    builder.append(", YGCT=");
-    builder.append(YGCT);
-    builder.append(", FGC=");
-    builder.append(FGC);
-    builder.append(", FGCT=");
-    builder.append(FGCT);
-    builder.append(", GCT=");
-    builder.append(GCT);
-    builder.append("]");
-    return builder.toString();
+    StringBuffer buffer = new StringBuffer();
+    buffer.append("JstatGCUtilBean [id=");
+    buffer.append(id);
+    buffer.append(", hostID=");
+    buffer.append(hostID);
+    buffer.append(", timeElasped=");
+    buffer.append(timeElasped);
+    buffer.append(", S0=");
+    buffer.append(S0);
+    buffer.append(", S1=");
+    buffer.append(S1);
+    buffer.append(", E=");
+    buffer.append(E);
+    buffer.append(", O=");
+    buffer.append(O);
+    buffer.append(", P=");
+    buffer.append(P);
+    buffer.append(", YGC=");
+    buffer.append(YGC);
+    buffer.append(", YGCT=");
+    buffer.append(YGCT);
+    buffer.append(", FGC=");
+    buffer.append(FGC);
+    buffer.append(", FGCT=");
+    buffer.append(FGCT);
+    buffer.append(", GCT=");
+    buffer.append(GCT);
+    buffer.append("]");
+    return buffer.toString();
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.swaroop.jstatui.bean.JstatOptionBean#toJsonString()
+   */
+  @Override
+  public String toJsonString() {
+    StringBuffer buffer = new StringBuffer();
+    buffer.append("[");
+    buffer.append(timeElasped);
+    buffer.append(",");
+    buffer.append(S0);
+    buffer.append(",");
+    buffer.append(S1);
+    buffer.append(",");
+    buffer.append(E);
+    buffer.append(",");
+    buffer.append(O);
+    buffer.append(",");
+    buffer.append(P);
+    buffer.append(",");
+    buffer.append(YGC);
+    buffer.append(",");
+    buffer.append(YGCT);
+    buffer.append(",");
+    buffer.append(FGC);
+    buffer.append(",");
+    buffer.append(FGCT);
+    buffer.append(",");
+    buffer.append(GCT);
+    buffer.append("]");
+    return buffer.toString();
   }
 
   /*

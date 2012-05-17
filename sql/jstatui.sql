@@ -281,3 +281,16 @@ CREATE TABLE `jstatui`.`jstat_printcompilation` (
     ON DELETE RESTRICT
     ON UPDATE RESTRICT
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8;
+
+truncate table jstat_class;
+truncate table jstat_compiler;
+truncate table jstat_gc;
+truncate table jstat_gccapacity;
+truncate table jstat_gccause;
+truncate table jstat_gcnew;
+truncate table jstat_gcnewcapacity;
+truncate table jstat_gcold;
+truncate table jstat_gcoldcapacity;
+truncate table jstat_gcpermcapacity;
+truncate table jstat_gcutil;
+truncate table jstat_printcompilation;

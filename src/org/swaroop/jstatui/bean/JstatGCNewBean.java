@@ -374,7 +374,7 @@ public class JstatGCNewBean implements Serializable,
 			bean.setTimeElasped(Float.parseFloat(columnValueMap
 					.get("timeElasped")));
 			bean.setS0C(Float.parseFloat(columnValueMap.get("S0C")));
-			bean.setS1C(Float.parseFloat(columnValueMap.get("SIC")));
+			bean.setS1C(Float.parseFloat(columnValueMap.get("S1C")));
 			bean.setS0U(Float.parseFloat(columnValueMap.get("S0U")));
 			bean.setS1U(Float.parseFloat(columnValueMap.get("S1U")));
 			bean.setTT(Integer.parseInt(columnValueMap.get("TT")));

@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.swaroop.jstatui.annotations.Column;
+import org.swaroop.jstatui.annotations.Table;
 import org.swaroop.jstatui.error.JstatUIError;
 
 /**
@@ -17,6 +18,7 @@ import org.swaroop.jstatui.error.JstatUIError;
  * @author Swaroop Patra
  * 
  */
+@Table(name="jstat_gcutil")
 public class JstatGCUtilBean implements Serializable,
     Comparable<JstatGCUtilBean>, JstatOptionBean {
 

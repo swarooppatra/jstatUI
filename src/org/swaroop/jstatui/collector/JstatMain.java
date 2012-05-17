@@ -35,13 +35,12 @@ public class JstatMain {
   public void start(JstatHostBean host) {
     log.info("Spawning thread to start stat collection");
     JStatOptions[] options = JStatOptions.values();
+    service = Executors.newCachedThreadPool();
     for (JStatOptions option : options) {
       JstatCollector collector = new JstatCollector(host, option);
       FutureTask<JstatCollector> ft = new FutureTask<JstatCollector>(collector);
-      service = Executors.newSingleThreadExecutor();
       service.submit(ft);
     }
-
   }
 
   /**
@@ -79,7 +78,7 @@ public class JstatMain {
     host.setActive((short) 1);
     host.setHost("localhost");
     host.setId(1);
-    host.setJvmProcessId(5804);
+    host.setJvmProcessId(20260);
     host.setJvmStartTime("2012-05-15 01:00:00");
     host.setPort(1099);
     boolean running = ProcessUtil.checkProcessStatus("localhost",

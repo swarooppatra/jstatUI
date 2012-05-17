@@ -24,7 +24,7 @@ import org.swaroop.jstatui.bean.JstatGCPermCapacityBean;
 import org.swaroop.jstatui.bean.JstatGCUtilBean;
 import org.swaroop.jstatui.bean.JstatHostBean;
 import org.swaroop.jstatui.bean.JstatOptionBean;
-import org.swaroop.jstatui.bean.JstatPrintCompilatinBean;
+import org.swaroop.jstatui.bean.JstatPrintCompilationBean;
 import org.swaroop.jstatui.db.DBConnection;
 import org.swaroop.jstatui.error.JstatUIError;
 import org.swaroop.jstatui.orm.ORMProcessor;
@@ -96,7 +96,7 @@ public class JstatCollector implements Callable<JstatCollector> {
       bean = new JstatGCUtilBean();
       break;
     case PRINT_COMPILATION:
-      bean = new JstatPrintCompilatinBean();
+      bean = new JstatPrintCompilationBean();
       break;
     default:
       log.error("Invalid Option. HOW???");
@@ -133,11 +133,10 @@ public class JstatCollector implements Callable<JstatCollector> {
         stat = br.readLine();
         date1 = new Date().getTime();
         if (date1 - date2 > (30 * 1000)) {
-          log.error("Exceded timeout. May be process is not running");
-          log.info("#############################");
-          log.info("Shuting down Executor service");
-          log.info("#############################");
-          JstatMain.shutdownAndAwaitTermination(JstatMain.service);
+          log.error("Excceed timeout. May be process is not running");
+          log.info("Stopping current thread "
+              + Thread.currentThread().getName());
+          Thread.currentThread().interrupt();
           break;
         }
         if (stat != null && !"".equals(stat)) {
@@ -177,15 +176,13 @@ public class JstatCollector implements Callable<JstatCollector> {
             ((JstatGCUtilBean) optionBean).setHostID(hostID);
             break;
           case PRINT_COMPILATION:
-            ((JstatPrintCompilatinBean) optionBean).setHostID(hostID);
+            ((JstatPrintCompilationBean) optionBean).setHostID(hostID);
             break;
           default:
             log.error("Invalid Option. HOW???");
             JstatUIError.addErrors(600, "Invalid option. HOW???");
           }
-          System.out.println(optionBean.getClass() + "\nstat" + stat + "\n bean" + optionBean);
           boolean inserted = ORMProcessor.insertABean(optionBean, conn);
-          Thread.sleep(1000 * 60 * 15);
           if (inserted) {
             date2 = new Date().getTime();
           }

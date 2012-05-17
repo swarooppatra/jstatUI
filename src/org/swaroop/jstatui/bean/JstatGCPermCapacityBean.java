@@ -35,7 +35,7 @@ public class JstatGCPermCapacityBean implements Serializable,
   @Column(name = "time_elasped")
   private float timeElasped;
 
-  @Column(name = "")
+  @Column(name = "PGCMN")
   private float PGCMN;
 
   @Column(name = "PGCMX")

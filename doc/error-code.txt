@@ -11,3 +11,4 @@ ERROR CODE	ERROR MESSAGE
 608			Error in parsing stats
 609			OS not yet supported
 610			Reflection Error
+611			Error related to Threading

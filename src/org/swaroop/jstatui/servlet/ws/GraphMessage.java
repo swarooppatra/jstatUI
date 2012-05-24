@@ -10,9 +10,6 @@ import java.nio.CharBuffer;
 import org.apache.catalina.websocket.MessageInbound;
 import org.apache.catalina.websocket.WsOutbound;
 import org.apache.log4j.Logger;
-import org.swaroop.jstatui.error.JstatUIError;
-
-import sun.security.action.GetBooleanAction;
 
 /**
  * This class responds to all message related request from WebSocket
@@ -52,7 +49,7 @@ public class GraphMessage extends MessageInbound {
   protected void onBinaryMessage(ByteBuffer bBuf) throws IOException {
     log.info("onBinaryMessage");
     if (bBuf.toString().equals("disconnect")) {
-      System.out.println("$$$$$$$$$$$$$$$disconnect");
+      bThread.interrupt();
       onClose(1);
     } else {
       broadCast(bBuf.toString());
@@ -63,7 +60,7 @@ public class GraphMessage extends MessageInbound {
   protected void onTextMessage(CharBuffer cBuf) throws IOException {
     log.info("onTextMessage");
     if (cBuf.toString().equals("disconnect")) {
-      System.out.println("###################disconnect");
+      bThread.interrupt();
       onClose(1);
     } else {
       broadCast(cBuf.toString());
@@ -73,18 +70,42 @@ public class GraphMessage extends MessageInbound {
   private void broadCast(String str) {
     log.info("broadCast");
     WsOutbound out = getWsOutbound();
-    
-    while (true)
-      try {
-        out.writeTextMessage(CharBuffer.wrap("Testing"));
-        System.out.println("Testing");
-        out.flush();
-        Thread.sleep(1000);
-      } catch (IOException e) {
-        log.error(e, e);
-      } catch (Exception e) {
-        log.error(e, e);
+    BroadCastThread bt = new BroadCastThread(out);
+    bThread = new Thread(bt);
+    bThread.start();
+  }
+
+  Thread bThread = null;
+
+  private class BroadCastThread implements Runnable {
+
+    private WsOutbound outBound = null;
+
+    public BroadCastThread(WsOutbound outBound) {
+      this.outBound = outBound;
+    }
+
+    @Override
+    public void run() {
+      while (true) {
+        if (outBound != null) {
+          try {
+            outBound.writeTextMessage(CharBuffer.wrap("Testing"));
+            System.out.println("Testing");
+            outBound.flush();
+            Thread.sleep(1000);
+          } catch (IOException e) {
+            log.error(e, e);
+            break;
+          } catch (Exception e) {
+            log.error(e, e);
+            break;
+          }
+        } else {
+          break;
+        }
       }
+    }
 
   }
 

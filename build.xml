@@ -21,6 +21,7 @@
 				<exclude name="jsp-api.jar" />
 				<exclude name="catalina.jar" />
 				<exclude name="servlet-api.jar" />
+				<exclude name="tomcat-coyote.jar" />
 			</lib>
 			<fileset dir="WebContent/">
 				<include name="**/*.tld" />

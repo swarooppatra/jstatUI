@@ -23,17 +23,18 @@
 				if('MozWebSocket' in window){
 					console.log("moz");
 					graphWS = new MozWebSocket(wsURL);
+					console.log(graphWS);
 				}else if('WebSocket' in window){
 					console.log("Non-moz");
 					graphWS =  new WebSocket(wsURL);
+					console.log(graphWS);
 				}else{
 					console.log("WebSocket is not supported");
 					alert("WebSocket is not supported");
 					return;
-				}				
-				graphWS.open = function(){
+				}
+				graphWS.onopen = function(){
 					console.log("Opening...");
-					graphWS.send("R u there???");
 				}
 				graphWS.onmessage = function(event){
 					console.log("Message : "+event.data);
@@ -43,8 +44,16 @@
 					console.log("closing");
 				};				
 			}
+			
+			function disconnect() {
+				if (graphWS != null) {
+					graphWS.send("disconnect");
+					console.log('Disconnecting');
+					graphWS.close();
+					graphWS = null;
+				}
+			}
 			function sendData(){
-				connect();
 				if (graphWS != null) {
 					try{
 						console.log('Sent: R u there???');
@@ -61,7 +70,9 @@
 	<body>
 		<h1>JVM statistics</h1>				
 		<p id="test"></p>
-		<button name="Start" title="Start" onclick="connect()"></button>
+		<button name="Start" title="Start" onclick="connect()"></button><br/><br/><br/>
+		<button name="Start2" title="Start2" onclick="sendData()"></button><br/><br/><br/>
+		<button name="Start3" title="Start3" onclick="disconnect()"></button>
 	</body>
 	
 </html>

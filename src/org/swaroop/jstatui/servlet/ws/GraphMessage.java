@@ -25,6 +25,11 @@ public class GraphMessage extends MessageInbound {
 
   private static final Logger log = Logger.getLogger("jstatui");
 
+  public GraphMessage() {
+    setByteBufferMaxSize(3000);
+    setCharBufferMaxSize(3000);
+  }
+
   @Override
   protected void onClose(int status) {
     super.onClose(status);
@@ -46,34 +51,41 @@ public class GraphMessage extends MessageInbound {
   @Override
   protected void onBinaryMessage(ByteBuffer bBuf) throws IOException {
     log.info("onBinaryMessage");
-    // broadCast(bBuf.toString());
-    getWsOutbound().writeBinaryMessage((ByteBuffer.wrap("Hello".getBytes())));
-    getWsOutbound().flush();
-    getWsOutbound().close(1, ByteBuffer.wrap("Closed".getBytes()));
+    if (bBuf.toString().equals("disconnect")) {
+      System.out.println("$$$$$$$$$$$$$$$disconnect");
+      onClose(1);
+    } else {
+      broadCast(bBuf.toString());
+    }
   }
 
   @Override
   protected void onTextMessage(CharBuffer cBuf) throws IOException {
     log.info("onTextMessage");
-    // broadCast(cBuf.toString());
-    getWsOutbound().writeTextMessage(CharBuffer.wrap("Testing"));
-    getWsOutbound().flush();
-    getWsOutbound().close(1, ByteBuffer.wrap("Closed".getBytes()));
+    if (cBuf.toString().equals("disconnect")) {
+      System.out.println("###################disconnect");
+      onClose(1);
+    } else {
+      broadCast(cBuf.toString());
+    }
   }
 
   private void broadCast(String str) {
     log.info("broadCast");
-    try {
-      WsOutbound out = getWsOutbound();
-      out.writeTextMessage(CharBuffer.wrap("Testing"));
-      Thread.sleep(10000);
-    } catch (InterruptedException e) {
-      log.error(e, e);
-      JstatUIError.addErrors(600, "Unable to send graph data");
-    } catch (IOException e) {
-      log.error(e, e);
-      JstatUIError.addErrors(611, "Unable to send graph data");
-    }
+    WsOutbound out = getWsOutbound();
+    
+    while (true)
+      try {
+        out.writeTextMessage(CharBuffer.wrap("Testing"));
+        System.out.println("Testing");
+        out.flush();
+        Thread.sleep(1000);
+      } catch (IOException e) {
+        log.error(e, e);
+      } catch (Exception e) {
+        log.error(e, e);
+      }
+
   }
 
 }

@@ -3,3 +3,5 @@
 http://feedproxy.google.com/~r/speckboy-design-magazine/~3/BIIJlvMmaiY/
 http://feeds.dzone.com/~r/javalobby/frontpage/~3/CoAnS5Kb_hQ/solving-outofmemoryerrors-apm
 http://feeds.dzone.com/~r/javalobby/frontpage/~3/8YkQslnDGnQ/high-cpu-troubleshooting-guide
+
+Responsive design

@@ -10,9 +10,12 @@ import org.apache.catalina.websocket.WebSocketServlet;
  */
 public class GraphWebSocket extends WebSocketServlet {
   private static final long serialVersionUID = 1L;
+  
+  
 
   @Override
-  protected StreamInbound createWebSocketInbound(String arg0) {    
+  protected StreamInbound createWebSocketInbound(String arg0) {
+    System.out.println("SubProtocol :: "+arg0);
     return new GraphMessage();
   }
 

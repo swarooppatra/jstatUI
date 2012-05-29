@@ -34,33 +34,26 @@
 		<div id="gc_util" class="graph"></div>
 		<div id="print_compilation" class="graph"></div>
 		<script type="text/javascript">
-			console.log("Test1");
 			var graphWS = null;
 			var wsURL = "ws://localhost:8080/JstatUI/websocket/graph";
 			
 			function connect(){
-				console.log("Attemepting to conncet to WS");
 				
 				if(wsURL == ''){
-					console.log("Invalid WS URL");
 					return;
 				}
 				if('MozWebSocket' in window){
-					console.log("moz");
 					try{
 					graphWS = new MozWebSocket(wsURL);
 					} catch(err){
 						console.log("WebSocket is not supported");
 					}
-					console.log(graphWS);
 				}else if('WebSocket' in window){
-					console.log("Non-moz");
 					try{
 						graphWS =  new WebSocket(wsURL);
 					} catch(err){
 						console.log("WebSocket is not supported");
 					}
-					console.log(graphWS);
 				}else{
 					console.log("WebSocket is not supported");
 					alert("WebSocket is not supported");
@@ -109,23 +102,52 @@
 				}
 			}
 			function drawGraph(data){
-				/*var plotData = data.split("::");
-				console.log(plotData[0]);
-				console.log(plotData[1]);*/
-				data = data.replace("],[","\n").replace("[","").replace("]","");
-				console.log(data);
-				g = new Dygraph(document.getElementById("class"),data,
+				var la = "";
+				var plotData = data.split("::");
+				var pt = plotData[0];
+				var plot = plotData[1];
+				if(pt==='class'){
+					la = new Array("Time Elasped", "Loaded Classes", "Loaded Bytes", "Unloaded Classes", "Unloaded Bytes", "Time Consumed");
+				} else if(pt==='compiler'){
+					la = new Array("Time Elasped", "Compiled", "Failed", "Invalid", "Time Spent", "Failed Type");
+				} else if(pt==='gc'){
+					la = new Array("Time Elasped", "S0C", "S1C", "S0U", "S1U", "EC", "EU", "OC", "OU", "PC", "PU", "YGC", "YGCT", "FGC", "FGCT", "GCT");
+				} else if(pt==='gc_capacity'){
+					la = new Array("Time Elasped", "NGCMN", "NGCMX", "NGC", "S0C", "S1C", "EC", "OGCMN", "OGCMX", "OGC", "OC", "PGCMN", "PGCMX", "PGC", "PC", "YGC", "FGC");
+				} else if(pt==='gc_cause'){
+					la = new Array("Time Elasped", "S0", "S1", "E", "O", "P", "YGC", "YGCT", "FGC", "FGCT", "GCT");
+				} else if(pt==='gc_new'){
+					la = new Array("Time Elasped", "S0C", "S1C", "S0U", "S1U", "TT", "MTT", "DSS", "EC", "EU", "YGC", "YGCT");
+				} else if(pt==='gc_new_capacity'){
+					la = new Array("Time Elasped", "NGCMN", "NGCMX", "NGC", "S0CMX", "S0C", "S1CMX", "S1C", "ECMX", "EC", "YGC", "FGC");
+				} else if(pt==='gc_old'){
+					la = new Array("Time Elasped", "PC", "PU", "OC", "OU", "YGC", "FGC", "FGCT", "GCT");
+				} else if(pt==='gc_old_capacity'){
+					la = new Array("Time Elasped", "OGCMN", "OGCMX", "OGC", "OC", "YGC", "FGC", "FGCT", "GCT");
+				} else if(pt==='gc_perm_capacity'){
+					la = new Array("Time Elasped", "PGCMN", "PGCMX", "PGC", "PC", "YGC", "FGC", "FGCT", "GCT");
+				} else if(pt==='gc_util'){
+					la = new Array("Time Elasped", "S0", "S1", "E", "O", "P", "YGC", "YGCT", "FGC", "FGCT", "GCT");
+				} else if(pt==='print_compilation'){
+					la = new Array("Time Elasped", "Compiled", "Size", "Type");
+				}
+				plot = plot.replace(/\],\[/g,"\n");
+				plot = plot.replace(/\[/g,"");
+				plot = plot.replace(/\]/g,"");
+				new Dygraph(document.getElementById(plotData[0]),plot,
 				    {
-						labels: [ "X", "a", "b", "c", "d", "e"],
+						labels: la,
 						labelsDivStyles: { border: '1px solid black' },
-					    title: 'Class Graph',
+					    title: plotData[0]+' Graph',
 					    xlabel: 'Time',
 					    ylabel: 'Marks',
 						strokeWidth: 2,
 						highlightCircleSize: 4
 					}
 				);
+				plot = null;
 			}
+			
 		</script>
 	</body>	
 </html>

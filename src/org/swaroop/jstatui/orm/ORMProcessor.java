@@ -27,7 +27,7 @@ import org.swaroop.jstatui.bean.JstatGCPermCapacityBean;
 import org.swaroop.jstatui.bean.JstatGCUtilBean;
 import org.swaroop.jstatui.bean.JstatHostBean;
 import org.swaroop.jstatui.bean.JstatOptionBean;
-import org.swaroop.jstatui.bean.JstatPrintCompilatinBean;
+import org.swaroop.jstatui.bean.JstatPrintCompilationBean;
 import org.swaroop.jstatui.collector.JStatOptions;
 import org.swaroop.jstatui.db.DBConnection;
 import org.swaroop.jstatui.error.JstatUIError;
@@ -198,8 +198,8 @@ public abstract class ORMProcessor {
       optionBean = JstatGCUtilBean.class;
       break;
     case PRINT_COMPILATION:
-      records = new ArrayList<JstatPrintCompilatinBean>();
-      optionBean = JstatPrintCompilatinBean.class;
+      records = new ArrayList<JstatPrintCompilationBean>();
+      optionBean = JstatPrintCompilationBean.class;
       break;
     default:
       log.error(type + " processing not yet implemented");

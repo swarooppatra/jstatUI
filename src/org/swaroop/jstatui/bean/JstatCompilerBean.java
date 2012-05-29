@@ -270,8 +270,6 @@ public class JstatCompilerBean implements Serializable,
     buffer.append(timeSpent);
     buffer.append(",");
     buffer.append(failedType);
-    buffer.append(",");
-    buffer.append(failedMethod);
     buffer.append("]");
     return buffer.toString();
   }

@@ -400,10 +400,6 @@ public class JstatGCCauseBean implements Comparable<JstatGCCauseBean>,
     buffer.append(FGCT);
     buffer.append(",");
     buffer.append(GCT);
-    buffer.append(",");
-    buffer.append(LGCC);
-    buffer.append(",");
-    buffer.append(GCC);
     buffer.append("]");
     return buffer.toString();
   }

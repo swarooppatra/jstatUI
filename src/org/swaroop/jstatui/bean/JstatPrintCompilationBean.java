@@ -226,8 +226,6 @@ public class JstatPrintCompilationBean implements Serializable,
     buffer.append(size);
     buffer.append(",");
     buffer.append(type);
-    buffer.append(",");
-    buffer.append(method);
     buffer.append("]");
     return buffer.toString();
   }

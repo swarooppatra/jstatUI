@@ -256,13 +256,42 @@ public class JstatGCOldCapacityBean implements Serializable,
     return true;
   }
 
+  @Override
+  public String toString() {
+    StringBuffer buffer = new StringBuffer();
+    buffer.append("JstatGCOldCapacityBean [id=");
+    buffer.append(id);
+    buffer.append(", hostID=");
+    buffer.append(hostID);
+    buffer.append(", timeElasped=");
+    buffer.append(timeElasped);
+    buffer.append(", OGCMN=");
+    buffer.append(OGCMN);
+    buffer.append(", OGCMX=");
+    buffer.append(OGCMX);
+    buffer.append(", OGC=");
+    buffer.append(OGC);
+    buffer.append(", OC=");
+    buffer.append(OC);
+    buffer.append(", YGC=");
+    buffer.append(YGC);
+    buffer.append(", FGC=");
+    buffer.append(FGC);
+    buffer.append(", FGCT=");
+    buffer.append(FGCT);
+    buffer.append(", GCT=");
+    buffer.append(GCT);
+    buffer.append("]");
+    return buffer.toString();
+  }
+
   /*
    * (non-Javadoc)
    * 
-   * @see java.lang.Object#toString()
+   * @see org.swaroop.jstatui.bean.JstatOptionBean#toJsonString()
    */
   @Override
-  public String toString() {
+  public String toJsonString() {
     StringBuffer buffer = new StringBuffer();
     buffer.append("[");
     buffer.append(timeElasped);
@@ -284,17 +313,6 @@ public class JstatGCOldCapacityBean implements Serializable,
     buffer.append(GCT);
     buffer.append("]");
     return buffer.toString();
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see org.swaroop.jstatui.bean.JstatOptionBean#toJsonString()
-   */
-  @Override
-  public String toJsonString() {
-    // TODO Auto-generated method stub
-    return null;
   }
 
   /*

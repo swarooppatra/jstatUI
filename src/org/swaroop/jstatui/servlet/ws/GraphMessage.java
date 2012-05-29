@@ -6,6 +6,7 @@ package org.swaroop.jstatui.servlet.ws;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
+import java.sql.Connection;
 import java.util.List;
 
 import org.apache.catalina.websocket.MessageInbound;
@@ -17,6 +18,7 @@ import org.swaroop.jstatui.collector.JStatOptions;
 import org.swaroop.jstatui.db.DBConnection;
 import org.swaroop.jstatui.orm.ORMProcessor;
 import org.swaroop.jstatui.util.JstatUtil;
+
 /**
  * This class responds to all message related request from WebSocket
  * {@link org.swaroop.jstatui.servlet.ws.GraphWebSocket GraphWebSocket}
@@ -94,6 +96,8 @@ public class GraphMessage extends MessageInbound {
 
     DBConnection dbConn = new DBConnection();
 
+    Connection conn = dbConn.getConnection();
+
     public BroadCastThread(WsOutbound outBound, String host, String processID) {
       this.outBound = outBound;
       this.host = host;
@@ -111,17 +115,16 @@ public class GraphMessage extends MessageInbound {
             hostBean.setHost(host);
             hostBean.setJvmProcessId(Integer.parseInt(processID));
             JStatOptions[] options = JStatOptions.values();
-            //for (JStatOptions option : options) {
+            for (JStatOptions option : options) {
               List<? extends JstatOptionBean> records = ORMProcessor
-                  .getLatestRecordsByCount(hostBean, JStatOptions.CLASS,
-                      dbConn.getConnection(), 100);
+                  .getLatestRecordsByCount(hostBean, option,
+                      conn, 100);
               String ploatString = JstatUtil.getPlotString(records);
-              System.out.println(JStatOptions.CLASS.name().toLowerCase()
-                  + " ::::::::::::::: " + ploatString);
-              outBound.writeTextMessage(CharBuffer.wrap(ploatString));
-            //}
-            
-            Thread.sleep(3000);
+              outBound.writeTextMessage(CharBuffer.wrap(option.name()
+                  .toLowerCase() + "::" + ploatString));
+            }
+
+            Thread.sleep(5000);
           } catch (IOException e) {
             log.error(e, e);
             break;

@@ -282,6 +282,15 @@ CREATE TABLE `jstatui`.`jstat_printcompilation` (
     ON UPDATE RESTRICT
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `jstatui`.`jstat_custom_plot`;
+CREATE  TABLE `jstatui`.`jstat_custom_plot` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `plot_name` VARCHAR(150) NOT NULL ,
+  `type_and_param` VARCHAR(500) NOT NULL ,
+  PRIMARY KEY (`id`) ,
+  UNIQUE INDEX `plot_name_UNIQUE` (`plot_name` ASC)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
 truncate table jstat_class;
 truncate table jstat_compiler;
 truncate table jstat_gc;
@@ -294,3 +303,4 @@ truncate table jstat_gcoldcapacity;
 truncate table jstat_gcpermcapacity;
 truncate table jstat_gcutil;
 truncate table jstat_printcompilation;
+truncate table jstat_custom_plot;

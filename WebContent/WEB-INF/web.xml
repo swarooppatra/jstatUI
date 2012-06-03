@@ -27,6 +27,11 @@
 		<jsp-file>/WEB-INF/jsp/stats.jsp</jsp-file>
 	</servlet>
 	<servlet>
+		<display-name>Custom Statistics JSP</display-name>
+		<servlet-name>customize</servlet-name>
+		<jsp-file>/WEB-INF/jsp/custom-plots.jsp</jsp-file>
+	</servlet>
+	<servlet>
 		<description>
 		</description>
 		<display-name>GraphWebSocket</display-name>
@@ -44,6 +49,10 @@
 	<servlet-mapping>
 		<servlet-name>statjsp</servlet-name>
 		<url-pattern>/stats</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>customize</servlet-name>
+		<url-pattern>/customize</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>GraphWebSocket</servlet-name>

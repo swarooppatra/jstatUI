@@ -28,8 +28,13 @@
 	</servlet>
 	<servlet>
 		<display-name>Custom Statistics JSP</display-name>
-		<servlet-name>customize</servlet-name>
+		<servlet-name>customize-old</servlet-name>
 		<jsp-file>/WEB-INF/jsp/custom-plots.jsp</jsp-file>
+	</servlet>
+	<servlet>
+		<display-name>Custom Statistics JSP</display-name>
+		<servlet-name>customize-new</servlet-name>
+		<jsp-file>/WEB-INF/jsp/customize.jsp</jsp-file>
 	</servlet>
 	<servlet>
 		<description>
@@ -51,8 +56,12 @@
 		<url-pattern>/stats</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>customize</servlet-name>
-		<url-pattern>/customize</url-pattern>
+		<servlet-name>customize-old</servlet-name>
+		<url-pattern>/customize-old</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>customize-new</servlet-name>
+		<url-pattern>/customize-new</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>GraphWebSocket</servlet-name>

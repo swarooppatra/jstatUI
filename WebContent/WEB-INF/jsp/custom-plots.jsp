@@ -5,28 +5,50 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Custom Stats</title>
 		<style type="text/css">
-			.addgph{background-image:url("../images/ui-icons_228ef1_256x240.png"); background-position:-30px -127px;display:block;height:16px;width:16px;float:left;cursor:pointer;}
-			.removegph{background-image:url("../images/ui-icons_228ef1_256x240.png"); background-position:-46px -127px;display:block;height:16px;width:16px;float:left;cursor:pointer;}
+			@CHARSET "UTF-8";
+			/* Browser Reset */
+			body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td, select {margin:0pt; padding:0pt;}
+			a {color:#027FB5;text-decoration:none;}
+			a:hover {text-decoration:underline;}
+			ul {list-style-type:none;padding:0;margin:0;}
+			h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}
+
+			body{margin:.5em 2.5em;font:14px verdana,arial,helvetica,sans-serif;}
+			h1{font-size:2em;font-weight:bold;margin-bottom:1em;}
+			.addgph, .addopt{background-image:url("./images/add.jpg");display:block;height:16px;width:16px;float:left;cursor:pointer;}
+			.removegph, .removeopt{background-image:url("./images/remove.jpg");display:block;height:16px;width:16px;float:left;cursor:pointer;}
 			.invi{display:none;}
-			.vi{display:block;}
+			.vi{display:inline;}
+			#pltopt{margin:0.9em;padding:0.9em;width:55%;padding:0.9em important!}
 		</style>
 		<script type="text/javascript" src="http://localhost:8080/JstatUI/js/dygraph-combined.js"></script>
 		<script type="text/javascript">
+			var d;
 			function showopts(){
-				var d;
+				if(d){
+					document.getElementById(""+d).className="invi";
+				}else{
+					document.getElementById("class").className="invi";
+				}
 				var opt = document.getElementById("statsid").options[document.getElementById("statsid").selectedIndex].value;
-				if(opt==='class'){document.getElementById("class").className="vi";d=opt;}
-				else if(opt==='compiler'){document.getElementById("compiler").className="vi";}
-				else if(opt==='gc'){document.getElementById("gc").className="vi";}
-				else if(opt==='gc_capacity'){document.getElementById("gc_capacity").className="vi";}
-				else if(opt==='gc_cause'){document.getElementById("gc_cause").className="vi";}
-				else if(opt==='gc_new'){document.getElementById("gc_new").className="vi";}
-				else if(opt==='gc_new_capacity'){document.getElementById("gc_new_capacity").className="vi";}
-				else if(opt==='gc_old'){document.getElementById("gc_old").className="vi";}
-				else if(opt==='gc_old_capacity'){document.getElementById("gc_old_capacity").className="vi";}
-				else if(opt==='gc_perm_capacity'){document.getElementById("gc_perm_capacity").className="vi";}
-				else if(opt==='gc_util'){document.getElementById("gc_util").className="vi";}
-				else if(opt==='print_compilation'){document.getElementById("print_compilation").className="vi";}
+				if(opt==='class'){document.getElementById("class").className="vi";d='class';}
+				else if(opt==='compiler'){document.getElementById("compiler").className="vi";d='compiler';}
+				else if(opt==='gc'){document.getElementById("gc").className="vi";d='gc';}
+				else if(opt==='gc_capacity'){document.getElementById("gc_capacity").className="vi";d='gc_capacity';}
+				else if(opt==='gc_cause'){document.getElementById("gc_cause").className="vi";d='gc_cause';}
+				else if(opt==='gc_new'){document.getElementById("gc_new").className="vi";d='';d='gc_new';}
+				else if(opt==='gc_new_capacity'){document.getElementById("gc_new_capacity").className="vi";d='gc_new_capacity';}
+				else if(opt==='gc_old'){document.getElementById("gc_old").className="vi";d='';d='gc_old';}
+				else if(opt==='gc_old_capacity'){document.getElementById("gc_old_capacity").className="vi";d='gc_old_capacity';}
+				else if(opt==='gc_perm_capacity'){document.getElementById("gc_perm_capacity").className="vi";d='gc_perm_capacity';}
+				else if(opt==='gc_util'){document.getElementById("gc_util").className="vi";d='gc_util';}
+				else if(opt==='print_compilation'){document.getElementById("print_compilation").className="vi";d='print_compilation';}
+			}
+			function sopt(){
+				document.getElementById("pltopt").className="vi";
+			}
+			function ropt(){
+				document.getElementById("pltopt").className="invi";
 			}
 		</script>
 	</head>
@@ -34,8 +56,10 @@
 		<h1>JVM Statistics</h1>
 		<form action="custom">
 			Plot Name : <input type="text" name="plotname"/>
-			<fieldset class="pltopt">
-				<legend>Graph Options</legend>
+			<div id="addGraph"><span class="addgph" onclick="sopt()"></span>&nbsp;&nbsp;Add a Graph</div>
+			<div id='removegph'></div>
+			<fieldset class="invi" id="pltopt">
+				<legend><span class="removegph" onclick="ropt()"></span>&nbsp;&nbsp;Graph Options</legend>
 				Stats Type : 
 				<select name="stats" onchange="showopts()" id="statsid">
 					<option value="class">Class</option>
@@ -144,7 +168,7 @@
 				    <option value="YGC">YGC</option>
 				    <option value="FGC">FGC</option>
 				</select>
-				<select name="class" id="class" class="invi">
+				<select name="class" id="class" class="vi">
 				    <option value="Loaded Classes">Loaded Classes</option>
 				    <option value="Loaded Bytes">Loaded Bytes</option>
 				    <option value="Unloaded Classes">Unloaded Classes</option>
@@ -189,8 +213,6 @@
 				<div id="addOption"><span class="addopt"></span>&nbsp;&nbsp;Add another command</div>
 				<div id='removeopt'></div>
 			</fieldset>
-			<div id="addGraph"><span class="addgph"></span>&nbsp;&nbsp;Add a Graph</div>
-			<div id='removegph'></div>
 		</form>
 	</body>
 </html>

@@ -24,13 +24,14 @@
 			.gphtbl tr:nth-child(even){background:#CCC}
 			.gphtbl tr:nth-child(odd){background:#C1D2E7}
 			select{margin:0 .2em;width:97%}
+			.invi{display:none}
 		</style>
 		<script type="text/javascript" src="./js/dygraph-combined.js"></script>
 		<script type="text/javascript" src="./js/jquery-1.7.2.min.js"></script>
 		<script type="text/javascript">
 			var d;
 			var gcnt = 3;
-			var gos = '<p class="gphnm"><input type="text" name="plotnamegno" value="Graph Name"/></p><table id="ggno" class="gphtbl"><tbody><tr><td id="ggno10">g</td><td id="ggno11">g</td></tr><tr><td id="ggno20">g</td><td id="ggno21">g</td></tr><tr><td id="ggno30">g</td><td id="ggno31">g</td></tr></tbody></table>';
+			var gos = '<p class="gphnm"><input type="text" name="plotnamegno" value="Graph Name"/></p><table class="gphtbl"><tbody><tr><td></td><td></td><td class="invi"></td><td class="invi"></td></tr><tr><td></td><td></td><td class="invi"></td><td class="invi"></td></tr><tr><td></td><td></td><td class="invi"></td><td class="invi"></td></tr></tbody></table>';
 			var stse = '<select name="stats" class="selst"><option value="-">--select--</option><option value="class">Class</option><option value="compiler">Compiler</option><option value="gc">GC</option><option value="gc_capacity">GC Capacity</option><option value="gc_cause">GC Cause</option><option value="gc_new">GC New</option><option value="gc_new_capacity">GC New Capacity</option><option value="gc_old">GC Old</option><option value="gc_old_capacity">GC Old Capacity</option><option value="gc_perm_capacity">GC Perm Capacity</option><option value="gc_util">GC Util</option><option value="print_compilation">Print Compilation</option></select>';
 			var coop = '<select name="compiler" class="op"><option value="Compiled">Compiled</option><option value="Failed">Failed</option><option value="Invalid">Invalid</option><option value="Time Spent">Time Spent</option><option value="Failed Type">Failed Type</option></select>';
 			var gccauop = '<select name="gc_cause" class="op"><option value="S0">S0</option><option value="S1">S1</option><option value="E">E</option><option value="O">O</option><option value="P">P</option><option value="YGC">YGC</option><option value="YGCT">YGCT</option><option value="FGC">FGC</option><option value="FGCT">FGCT</option><option value="GCT">GCT</option></select>';
@@ -69,7 +70,7 @@
 					}
 				}));
 				$(document).on("click", "td:first-child", (function(e){
-					var tdop = $(e.target).text();
+					/*var tdop = $(e.target).text();
 					if(tdop.indexOf("select") == -1 && tdop != "g"){
 						$(e.target).html(stse);
 						var $opts = $("option", ".selst");
@@ -79,17 +80,27 @@
 								$(".selst").val($(this).val());
 							}
 						});
-					}
+					}*/
 					$(e.target).html(stse);
 					$(".selst").focus();
 				}));
 				$(document).on("click", "tr:last-child td:first-child", (function(e){
-					console.log("hey last row first td");
+				    var chg = true;
+					$(e.target).parent().siblings().each(function(){
+						var tdv = $(this).children("td:first-child").html();
+						if(tdv === "g" || tdv === ""){
+						    chg = false && chg;
+						}
+					});
+					if(chg){
+						$(e.target).parent().parent().append('<tr><td></td><td></td><td class="invi"></td><td class="invi"></td></tr>');
+					}
 				}));
 				$(document).on("change", ".selst", (function(e){
 					var v1 = $(e.target).find("option:selected").text();
 					var v2 = $(e.target).val();
 					var t = $(e.target).parent().html(v1);
+					$(t).siblings("td:nth-child(3)").html(v2);
 					showopts(t, v2);
 				}));
 				$(document).on("blur", ".selst", (function(e){
@@ -97,7 +108,16 @@
 					$(e.target).parent().html("g");
 				}));
 				$(document).on("change", ".op", (function(e){
+				    $(e.target).parent().siblings("td:last-child").html($(e.target).val());
 					$(e.target).parent().html($(e.target).val());
+					
+				}));
+				$(document).on("blur", ".op", (function(e){
+				    $(e.target).parent().html($(e.target).parent().siblings("td:last-child").html());
+				}));
+				$(document).on("click", "td:nth-child(2)", (function(e){
+					showopts($(e.target).siblings("td:first-child"), $(e.target).siblings("td:nth-child(3)").text());
+					$(".op").focus();
 				}));
 			});
 			function drawGraph(gn){
@@ -105,18 +125,18 @@
 				$("#custfrm").append(gosr);
 			}
 			function showopts(ele, opt){
-				if(opt==='class'){$(ele).siblings().html(clop);}
-				else if(opt==='compiler'){$(ele).siblings().html(coop);}
-				else if(opt==='gc'){$(ele).siblings().html(gcop);}
-				else if(opt==='gc_capacity'){$(ele).siblings().html(gccop);}
-				else if(opt==='gc_cause'){$(ele).siblings().html(gccauop);}
-				else if(opt==='gc_new'){$(ele).siblings().html(gcnop);}
-				else if(opt==='gc_new_capacity'){$(ele).siblings().html(gcncop);}
-				else if(opt==='gc_old'){$(ele).siblings().html(gcoop);}
-				else if(opt==='gc_old_capacity'){$(ele).siblings().html(gcocop);}
-				else if(opt==='gc_perm_capacity'){$(ele).siblings().html(gcpcop);}
-				else if(opt==='gc_util'){$(ele).siblings().html(gcuop);}
-				else if(opt==='print_compilation'){$(ele).siblings().html(pcop);}
+				if(opt==='class'){$(ele).siblings("td:nth-child(2)").html(clop);}
+				else if(opt==='compiler'){$(ele).siblings("td:nth-child(2)").html(coop);}
+				else if(opt==='gc'){$(ele).siblings("td:nth-child(2)").html(gcop);}
+				else if(opt==='gc_capacity'){$(ele).siblings("td:nth-child(2)").html(gccop);}
+				else if(opt==='gc_cause'){$(ele).siblings("td:nth-child(2)").html(gccauop);}
+				else if(opt==='gc_new'){$(ele).siblings("td:nth-child(2)").html(gcnop);}
+				else if(opt==='gc_new_capacity'){$(ele).siblings("td:nth-child(2)").html(gcncop);}
+				else if(opt==='gc_old'){$(ele).siblings("td:nth-child(2)").html(gcoop);}
+				else if(opt==='gc_old_capacity'){$(ele).siblings("td:nth-child(2)").html(gcocop);}
+				else if(opt==='gc_perm_capacity'){$(ele).siblings("td:nth-child(2)").html(gcpcop);}
+				else if(opt==='gc_util'){$(ele).siblings("td:nth-child(2)").html(gcuop);}
+				else if(opt==='print_compilation'){$(ele).siblings("td:nth-child(2)").html(pcop);}
 			}
 		</script>
 	</head>

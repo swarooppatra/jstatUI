@@ -201,7 +201,7 @@ public class ProcessUtil {
    * @return Return true if process is running otherwise false
    */
   private static boolean checkProcessStatusOnLinux(String host, int processID) {
-    log.info("Checking process status for PID : "+processID+" on windows");
+    log.info("Checking process status for PID : "+processID+" on Linux/Unix");
     boolean running = false;
     String sshCommand = "ssh " + host
         + " ls -ld --time-style=+%Y-%m-%d::%H:%M:%S /proc/" + processID;

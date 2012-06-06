@@ -43,6 +43,13 @@
 		<servlet-name>GraphWebSocket</servlet-name>
 		<servlet-class>org.swaroop.jstatui.servlet.ws.GraphWebSocket</servlet-class>
 	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>SaveCustomGraphs</display-name>
+		<servlet-name>SaveCustomGraphs</servlet-name>
+		<servlet-class>org.swaroop.jstatui.servlet.SaveCustomGraphs</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>Log4jInit</servlet-name>
 		<url-pattern>/log4jinit</url-pattern>
@@ -66,5 +73,9 @@
 	<servlet-mapping>
 		<servlet-name>GraphWebSocket</servlet-name>
 		<url-pattern>/websocket/graph</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>SaveCustomGraphs</servlet-name>
+		<url-pattern>/save</url-pattern>
 	</servlet-mapping>
 </web-app>

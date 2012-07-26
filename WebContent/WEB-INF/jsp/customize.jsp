@@ -4,32 +4,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 		<title>Customize Plotting</title>
-		<style type="text/css">
-			@CHARSET "UTF-8";
-			/* Browser Reset */
-			body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td, select {margin:0pt; padding:0pt}
-			a {color:#027FB5;text-decoration:none}
-			a:hover {text-decoration:underline}
-			ul {list-style-type:none;padding:0;margin:0}
-			h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}
-
-			body{margin:.5em 2.5em;font:14px verdana,arial,helvetica,sans-serif}
-			h1{font-size:2em;font-weight:bold;margin-bottom:1em}
-			#custfrm{border-style:solid;height:100%;margin-left:17em;padding:1em;width:55%;border-radius:15px}
-			.gphnm{background-color:orange;padding:0.5em}
-			.gphnm input{color:gray;padding:0.25em}
-			.gphtbl{border-style:dotted;border-width:0.1em;margin:1em 0 1em 11em;width:28em}
-			.gphtbl td{width:14em;}
-			.gphtbl tr{height:1.5em}
-			.gphtbl tr:nth-child(even){background:#CCC}
-			.gphtbl tr:nth-child(odd){background:#C1D2E7}
-			select{margin:0 .2em;width:97%}
-			.invi{display:none}
-			.inv1{visibility:hidden}
-			.gphtbl td.clr{background: url("./images/remove.jpg");width:16px;cursor:pointer;}
-			#subbtn{background:#CCDD11;border:.1em solid;color:#000;float:right;font-weight:bold;margin:1.5em 24em;padding:.25em}
-			#noti{visibility:hidden;height:2em;padding:.5em 0 0 .5em;background:yellow;color:red;margin-bottom:1em;width:60%;border-radius:5px}
-		</style>
+		<link rel="stylesheet" type="text/css" href="./css/jstatui.css"/>
 		<script type="text/javascript" src="./js/dygraph-combined.js"></script>
 		<script type="text/javascript" src="./js/jquery-1.7.2.min.js"></script>
 		<script type="text/javascript">
@@ -192,7 +167,8 @@
 		</script>
 	</head>
 	<body>
-		<h1>Customize your plots</h1>
+		<jsp:include page="./page-header.html"></jsp:include>
+		<h2>Customize your plots</h2>
 		<p id="noti"></p>
 		<form id="custfrm" action="#" method="get">
 		</form>

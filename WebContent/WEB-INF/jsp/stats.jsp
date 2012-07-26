@@ -6,13 +6,12 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 		<title>JVM statistics - JStatUI</title>
-		<style type="text/css">
-			.graph{width:900px; height:500px;border-bottom:20px;}
-		</style>
+		<link rel="stylesheet" type="text/css" href="./css/jstatui.css"/>
 		<script type="text/javascript" src="http://localhost:8080/JstatUI/js/dygraph-combined.js"></script>
 	</head>
 	<body>
-		<h1>JVM statistics</h1>
+		<jsp:include page="./page-header.html"></jsp:include>
+		<h2>JVM Statitics</h2>
 		<form name="t" action="#">
 			<button  type="button" onclick="connect()">Connect</button>
 			<button  type="button" onclick="sendData()">Send Data</button>

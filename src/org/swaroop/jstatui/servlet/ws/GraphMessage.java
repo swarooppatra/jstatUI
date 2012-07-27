@@ -9,12 +9,16 @@ import java.nio.CharBuffer;
 import java.sql.Connection;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.catalina.websocket.MessageInbound;
 import org.apache.catalina.websocket.WsOutbound;
 import org.apache.log4j.Logger;
+import org.swaroop.jstatui.bean.JstatCustomPlotBean;
 import org.swaroop.jstatui.bean.JstatHostBean;
 import org.swaroop.jstatui.bean.JstatOptionBean;
 import org.swaroop.jstatui.collector.JStatOptions;
+import org.swaroop.jstatui.dao.JstatCustomPlotDAO;
 import org.swaroop.jstatui.db.DBConnection;
 import org.swaroop.jstatui.orm.ORMProcessor;
 import org.swaroop.jstatui.util.JstatUtil;
@@ -30,7 +34,15 @@ public class GraphMessage extends MessageInbound {
 
   private static final Logger log = Logger.getLogger("jstatui");
 
+  private HttpServletRequest req;
+
   public GraphMessage() {
+    setByteBufferMaxSize(3000);
+    setCharBufferMaxSize(3000);
+  }
+
+  public GraphMessage(HttpServletRequest req) {
+    this.req = req;
     setByteBufferMaxSize(3000);
     setCharBufferMaxSize(3000);
   }
@@ -98,6 +110,10 @@ public class GraphMessage extends MessageInbound {
 
     Connection conn = dbConn.getConnection();
 
+    boolean customized = new Boolean(req.getParameter("customise"));
+
+    String[] customGraphName = req.getParameterValues("customgraph");
+
     public BroadCastThread(WsOutbound outBound, String host, String processID) {
       this.outBound = outBound;
       this.host = host;
@@ -115,15 +131,22 @@ public class GraphMessage extends MessageInbound {
             hostBean.setHost(host);
             hostBean.setJvmProcessId(Integer.parseInt(processID));
             JStatOptions[] options = JStatOptions.values();
-            for (JStatOptions option : options) {
-              List<? extends JstatOptionBean> records = ORMProcessor
-                  .getLatestRecordsByCount(hostBean, option,
-                      conn, 100);
-              String ploatString = JstatUtil.getPlotString(records);
-              outBound.writeTextMessage(CharBuffer.wrap(option.name()
-                  .toLowerCase() + "::" + ploatString));
+            if (!customized) {
+              for (JStatOptions option : options) {
+                List<? extends JstatOptionBean> records = ORMProcessor
+                    .getLatestRecordsByCount(hostBean, option, conn, 100);
+                String ploatString = JstatUtil.getPlotString(records);
+                outBound.writeTextMessage(CharBuffer.wrap(option.name()
+                    .toLowerCase() + "::" + ploatString));
+              }
+            } else {
+              JstatCustomPlotDAO dao = new JstatCustomPlotDAO();
+              for (String gName : customGraphName) {
+                JstatCustomPlotBean bean = dao
+                    .getCustomPlotBeanByPlotName(gName);
+                
+              }
             }
-
             Thread.sleep(5000);
           } catch (IOException e) {
             log.error(e, e);
